@@ -1,51 +1,75 @@
 import {
-  Navbar, Group, Code, ScrollArea, createStyles,
+  Navbar, Text, Group, Code, ScrollArea, createStyles,
 } from '@mantine/core'
 import {
-  IconNotes,
-  IconCalendarStats,
   IconGauge,
-  IconPresentationAnalytics,
-  IconFileAnalytics,
-  IconAdjustments,
-  IconLock,
+  IconComponents,
+  IconIcons,
+  IconChartPie,
+  IconTable,
+  IconError404,
+  IconUser,
+  IconHeartHandshake,
+  IconForms,
 } from '@tabler/icons'
 import LinksGroup from './SidebarLinkGroup'
 
 const mockdata = [
-  { label: 'Dashboard', icon: IconGauge },
+  { label: 'Dashboard', icon: IconGauge, link: '/' },
   {
-    label: 'Market news',
-    icon: IconNotes,
-    initiallyOpened: true,
+    label: 'Forms',
+    icon: IconForms,
     links: [
-      { label: 'Overview', link: '/' },
-      { label: 'Forecasts', link: '/' },
-      { label: 'Outlook', link: '/' },
-      { label: 'Real time', link: '/' },
+      { label: 'Basic Form', link: '/forms/basic-form' },
+      { label: 'Step Form', link: '/forms/step-form' },
+      { label: 'Advanced Form', link: '/forms/advanced-form' },
     ],
   },
   {
-    label: 'Releases',
-    icon: IconCalendarStats,
+    label: 'Components',
+    icon: IconComponents,
     links: [
-      { label: 'Upcoming releases', link: '/' },
-      { label: 'Previous releases', link: '/' },
-      { label: 'Releases schedule', link: '/' },
+      { label: 'Card', link: '/components/card' },
+      { label: 'Rich Text Editor', link: '/components/rich-text-editor' },
     ],
   },
-  { label: 'Analytics', icon: IconPresentationAnalytics },
-  { label: 'Contracts', icon: IconFileAnalytics },
-  { label: 'Settings', icon: IconAdjustments },
+  { label: 'Icons', icon: IconIcons, link: '/icons' },
   {
-    label: 'Security',
-    icon: IconLock,
+    label: 'Charts',
+    icon: IconChartPie,
     links: [
-      { label: 'Enable 2FA', link: '/' },
-      { label: 'Change password', link: '/' },
-      { label: 'Recovery codes', link: '/' },
+      { label: 'Line Chart', link: '/charts/line' },
+      { label: 'Bar Chart', link: '/charts/bar' },
+      { label: 'Pie Chart', link: '/charts/pie' },
     ],
   },
+  {
+    label: 'Tables',
+    icon: IconTable,
+    links: [
+      { label: 'Simple Table', link: '/tables/simple-table' },
+      { label: 'Dynamic Table', link: '/tables/dynamic-table' },
+      { label: 'Advanced Table', link: '/tables/advanced-table' },
+    ],
+  },
+  {
+    label: 'Error Pages',
+    icon: IconError404,
+    links: [
+      { label: '403', link: '/pages/403' },
+      { label: '404', link: '/pages/404' },
+      { label: '500', link: '/pages/500' },
+    ],
+  },
+  {
+    label: 'Account Pages',
+    icon: IconUser,
+    links: [
+      { label: 'Account Profile', link: '/account/profile' },
+      { label: 'Account Settings', link: '/account/settings' },
+    ],
+  },
+  { label: 'Donate', icon: IconHeartHandshake, link: 'https://github.com/rsurya99' },
 ]
 
 const useStyles = createStyles((theme) => ({
@@ -93,7 +117,7 @@ export default function NavbarNested() {
     <Navbar width={{ sm: 300 }} p="md" className={classes.navbar}>
       <Navbar.Section className={classes.header}>
         <Group position="apart">
-          <h3 style={{ margin: 0 }}>Silient</h3>
+          <Text color="dark.7" size="lg" weight={600}>Silient</Text>
           <Code sx={{ fontWeight: 700 }}>v0.0.1</Code>
         </Group>
       </Navbar.Section>

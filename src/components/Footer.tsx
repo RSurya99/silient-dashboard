@@ -1,7 +1,7 @@
 import {
   createStyles, Group, ActionIcon, Text,
 } from '@mantine/core'
-import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons'
+import { IconBrandGithub, IconBrandTwitter, IconBrandInstagram } from '@tabler/icons'
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -28,15 +28,15 @@ function Footer() {
   return (
     <div className={classes.footer}>
       <div className={classes.inner}>
-        <Text size="lg" weight={500}>
-          Logo
+        <Text size="sm" weight={500} c="dark.3">
+          Copyright &copy; 2022 Silient Dashboard Made by RSurya99
         </Text>
         <Group spacing={0} position="right" noWrap>
           <ActionIcon size="lg">
-            <IconBrandTwitter size={18} stroke={1.5} />
+            <IconBrandGithub size={18} stroke={1.5} />
           </ActionIcon>
           <ActionIcon size="lg">
-            <IconBrandYoutube size={18} stroke={1.5} />
+            <IconBrandTwitter size={18} stroke={1.5} />
           </ActionIcon>
           <ActionIcon size="lg">
             <IconBrandInstagram size={18} stroke={1.5} />

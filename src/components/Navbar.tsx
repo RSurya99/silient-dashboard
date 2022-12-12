@@ -125,13 +125,13 @@ function Navbar() {
         <Group>
           <ActionIcon
             size="lg"
-            variant="outline"
+            variant="transparent"
             onClick={onClickSidebarToggle}
-            title="Toggle color scheme"
+            color="primaryColor"
           >
             <IconMenu2 size={20} />
           </ActionIcon>
-          <h3 style={{ margin: 0 }}>Dashboard</h3>
+          <Text color="dark.7" size="lg" weight={600}>Dashboard</Text>
         </Group>
 
         <Group>

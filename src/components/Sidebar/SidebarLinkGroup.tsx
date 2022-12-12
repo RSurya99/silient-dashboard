@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import {
-  Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles,
+  Group, Box, Collapse, ThemeIcon, Text, createStyles, UnstyledButton, Anchor,
 } from '@mantine/core'
 import {
   TablerIcon, IconCalendarStats, IconChevronLeft, IconChevronRight,
 } from '@tabler/icons'
+import { useLocation, Link } from 'react-router-dom'
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -16,7 +17,15 @@ const useStyles = createStyles((theme) => ({
     fontSize: theme.fontSizes.sm,
 
     '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[1],
+      color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+      textDecoration: 'none',
+    },
+  },
+
+  controlActive: {
+    '&, &:hover': {
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.blue[1],
       color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     },
   },
@@ -50,22 +59,30 @@ interface LinksGroupProps {
   label: string;
   initiallyOpened?: boolean;
   links?: { label: string; link: string }[];
+  link?: string;
 }
 
 export default function LinksGroup({
-  icon: Icon, label, initiallyOpened, links,
+  icon: Icon, label, initiallyOpened, links, link: href,
 }: LinksGroupProps) {
-  const { classes, theme } = useStyles()
+  const { classes, theme, cx } = useStyles()
+  const location = useLocation()
   const hasLinks = Array.isArray(links)
   const [opened, setOpened] = useState(initiallyOpened || false)
   const ChevronIcon = theme.dir === 'ltr' ? IconChevronRight : IconChevronLeft
+  const SidebarItemProps: any = {}
+  if (href) {
+    const isExternal = href.includes('http')
+    SidebarItemProps.component = isExternal ? Anchor : Link
+    SidebarItemProps[isExternal ? 'href' : 'to'] = href
+    if (isExternal) SidebarItemProps.target = '_blank'
+  }
   const items = (hasLinks ? links : []).map((link) => (
-    <Text<'a'>
-      component="a"
-      className={classes.link}
-      href={link.link}
+    <Text
+      component={Link}
+      className={cx(classes.link, { [classes.controlActive]: location.pathname === link.link })}
+      to={link.link}
       key={link.label}
-      onClick={(event) => event.preventDefault()}
     >
       {link.label}
     </Text>
@@ -73,13 +90,19 @@ export default function LinksGroup({
 
   return (
     <>
-      <UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
+      <UnstyledButton
+        onClick={() => setOpened((o) => !o)}
+        className={cx(classes.control, { [classes.controlActive]: location.pathname === href })}
+        {...SidebarItemProps}
+      >
         <Group position="apart" spacing={0}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <ThemeIcon variant="light" size={30}>
               <Icon size={18} />
             </ThemeIcon>
-            <Box ml="md">{label}</Box>
+            <Box ml="md">
+              {label}
+            </Box>
           </Box>
           {hasLinks && (
             <ChevronIcon
