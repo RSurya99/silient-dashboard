@@ -7,6 +7,7 @@ import type {
 
 const initialState: NavbarState = {
   sidebarToggle: true,
+  breadcrumbItems: [],
 }
 
 const NavbarContext = createContext<NavbarState>(initialState)
@@ -27,6 +28,12 @@ function NavbarReducer(state: NavbarState, action: NavbarAction) {
       return {
         ...state,
         sidebarToggle: action.sidebarToggle,
+      }
+    }
+    case 'UPDATE_BREADCRUMB_ITEMS': {
+      return {
+        ...state,
+        breadcrumbItems: action.breadcrumbItems,
       }
     }
     default: {

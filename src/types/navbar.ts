@@ -24,6 +24,12 @@ export interface TaskProps {
   task: Navbar
 }
 
+export interface BreadcrumbItem {
+  label: string,
+  link: string
+}
+
 export type NavbarState = {
-  sidebarToggle: boolean
+  sidebarToggle: boolean,
+  breadcrumbItems: BreadcrumbItem[]
 }

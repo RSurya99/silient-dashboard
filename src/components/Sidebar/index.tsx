@@ -114,7 +114,7 @@ export default function NavbarNested() {
   const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />)
 
   return (
-    <Navbar width={{ sm: 300 }} p="md" className={classes.navbar}>
+    <Navbar width={{ sm: 275 }} p="md" className={classes.navbar}>
       <Navbar.Section className={classes.header}>
         <Group position="apart">
           <Text color="dark.7" size="lg" weight={600}>Silient</Text>

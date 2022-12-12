@@ -23,7 +23,12 @@ const useStyles = createStyles((theme) => ({
 
 function DefaultLayout() {
   const { classes } = useStyles()
-  const { sidebarToggle } = useNavbar()
+  const { sidebarToggle, breadcrumbItems } = useNavbar()
+  const items = breadcrumbItems.map((item) => (
+    <Anchor size="sm" component={Link} to={item.link}>
+      {item.label}
+    </Anchor>
+  ))
 
   return (
     <Flex className={classes.wrapper}>
@@ -32,15 +37,7 @@ function DefaultLayout() {
         <Navbar />
         <div className={classes.content}>
           <Breadcrumbs>
-            <Anchor size="sm" component={Link} to="/">
-              Home
-            </Anchor>
-            <Anchor size="sm" component={Link} to="/component">
-              Component
-            </Anchor>
-            <Anchor size="sm" component={Link} to="/component/table">
-              Table
-            </Anchor>
+            {items}
           </Breadcrumbs>
           <Outlet />
         </div>
