@@ -33,6 +33,8 @@ const useStyles = createStyles((theme) => ({
   header: {
     paddingLeft: theme.spacing.md,
     paddingRight: theme.spacing.md,
+    position: 'sticky',
+    top: 0,
   },
 
   inner: {
@@ -120,7 +122,7 @@ function Navbar() {
   const dark = colorScheme === 'dark'
 
   return (
-    <Header height={56} className={classes.header} pb={61}>
+    <Header height={56} className={classes.header} pb={60}>
       <div className={classes.inner}>
         <Group>
           <ActionIcon

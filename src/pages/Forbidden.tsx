@@ -43,7 +43,7 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-function NoMatch() {
+function Forbidden() {
   const { classes } = useStyles()
   const dispatch = useNavbarDispatch()
 
@@ -58,11 +58,11 @@ function NoMatch() {
 
   return (
     <Container className={classes.root}>
-      <div className={classes.label}>404</div>
-      <Title className={classes.title}>You have found a secret place.</Title>
+      <div className={classes.label}>403</div>
+      <Title className={classes.title}>Oops, you don&apos;t have access to this page.</Title>
       <Text color="dimmed" size="lg" align="center" className={classes.description}>
-        Unfortunately, this is only a 404 page. You may have mistyped the address, or the page has
-        been moved to another URL.
+        Unfortunately, you don&apos;t have access to this page.
+        You may have logged in with wrong account or trying to bypass from the url.
       </Text>
       <Group position="center">
         <Button component={Link} to="/" variant="subtle" size="md">
@@ -73,4 +73,4 @@ function NoMatch() {
   )
 }
 
-export default NoMatch
+export default Forbidden

@@ -1,73 +1,93 @@
 import {
-  createStyles, Group, Paper, Text, ThemeIcon, SimpleGrid,
+  createStyles, Group, Paper, SimpleGrid, Text,
 } from '@mantine/core'
-import { IconArrowUpRight, IconArrowDownRight } from '@tabler/icons'
+import {
+  IconArrowUpRight,
+  IconArrowDownRight,
+  TablerIcon,
+} from '@tabler/icons'
 
 const useStyles = createStyles((theme) => ({
   root: {
-    padding: `${theme.spacing.md}px 0`,
+    padding: `${theme.spacing.lg}px 0`,
   },
 
-  label: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+  value: {
+    fontSize: 24,
+    fontWeight: 700,
+    lineHeight: 1,
+  },
+
+  diff: {
+    lineHeight: 1,
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+  icon: {
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[4],
+  },
+
+  title: {
+    fontWeight: 700,
+    textTransform: 'uppercase',
   },
 }))
 
-interface StatsGridIconsProps {
-  data: { title: string; value: string; diff: number }[];
+interface StatsGridProps {
+  data: { title: string; icon: TablerIcon; value: string; diff: number }[];
 }
 
-export default function Stats({ data }: StatsGridIconsProps) {
+function Stats({ data }: StatsGridProps) {
   const { classes } = useStyles()
   const stats = data.map((stat) => {
+    const Icon = stat.icon
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight
 
     return (
       <Paper withBorder p="md" radius="sm" key={stat.title}>
         <Group position="apart">
-          <div>
-            <Text
-              color="dimmed"
-              transform="uppercase"
-              weight={700}
-              size="xs"
-              className={classes.label}
-            >
-              {stat.title}
-            </Text>
-            <Text weight={700} size="xl">
-              {stat.value}
-            </Text>
-          </div>
-          <ThemeIcon
-            color="gray"
-            variant="light"
-            sx={(theme) => ({ color: stat.diff > 0 ? theme.colors.teal[6] : theme.colors.red[6] })}
-            size={38}
-            radius="md"
-          >
-            <DiffIcon size={28} stroke={1.5} />
-          </ThemeIcon>
-        </Group>
-        <Text color="dimmed" size="sm" mt="md">
-          <Text component="span" color={stat.diff > 0 ? 'teal' : 'red'} weight={700}>
-            {stat.diff}
-            %
+          <Text size="xs" color="dimmed" className={classes.title}>
+            {stat.title}
           </Text>
-          {' '}
-          {stat.diff > 0 ? 'increase' : 'decrease'}
-          {' '}
-          compared to last month
+          <Icon className={classes.icon} size={22} stroke={1.5} />
+        </Group>
+
+        <Group align="flex-end" spacing="xs" mt={25}>
+          <Text className={classes.value}>{stat.value}</Text>
+          <Text
+            color={stat.diff > 0 ? 'teal' : 'red'}
+            size="sm"
+            weight={500}
+            className={classes.diff}
+          >
+            <span>
+              {stat.diff}
+              %
+            </span>
+            <DiffIcon size={16} stroke={1.5} />
+          </Text>
+        </Group>
+
+        <Text size="xs" color="dimmed" mt={7}>
+          Compared to previous month
         </Text>
       </Paper>
     )
   })
-
   return (
     <div className={classes.root}>
-      <SimpleGrid cols={3} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+      <SimpleGrid
+        cols={4}
+        breakpoints={[
+          { maxWidth: 'md', cols: 2 },
+          { maxWidth: 'xs', cols: 1 },
+        ]}
+      >
         {stats}
       </SimpleGrid>
     </div>
   )
 }
+
+export default Stats

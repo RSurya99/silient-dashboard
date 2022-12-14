@@ -43,7 +43,7 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-function NoMatch() {
+function ServerError() {
   const { classes } = useStyles()
   const dispatch = useNavbarDispatch()
 
@@ -58,11 +58,10 @@ function NoMatch() {
 
   return (
     <Container className={classes.root}>
-      <div className={classes.label}>404</div>
-      <Title className={classes.title}>You have found a secret place.</Title>
+      <div className={classes.label}>500</div>
+      <Title className={classes.title}>Oops, Something went wrong.</Title>
       <Text color="dimmed" size="lg" align="center" className={classes.description}>
-        Unfortunately, this is only a 404 page. You may have mistyped the address, or the page has
-        been moved to another URL.
+        We are working on fixing the problem, please try again later.
       </Text>
       <Group position="center">
         <Button component={Link} to="/" variant="subtle" size="md">
@@ -73,4 +72,4 @@ function NoMatch() {
   )
 }
 
-export default NoMatch
+export default ServerError

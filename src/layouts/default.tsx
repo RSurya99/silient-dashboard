@@ -11,10 +11,12 @@ const useStyles = createStyles((theme) => ({
   main: {
     width: '100%',
     position: 'relative',
+    height: '100vh',
+    overflowY: 'auto',
   },
   wrapper: {
-    height: '100vh',
     overflow: 'hidden',
+    position: 'relative',
   },
   content: {
     margin: theme.spacing.xl,
@@ -25,7 +27,7 @@ function DefaultLayout() {
   const { classes } = useStyles()
   const { sidebarToggle, breadcrumbItems } = useNavbar()
   const items = breadcrumbItems.map((item) => (
-    <Anchor size="sm" component={Link} to={item.link}>
+    <Anchor size="sm" component={Link} to={item.link} key={item.link}>
       {item.label}
     </Anchor>
   ))
