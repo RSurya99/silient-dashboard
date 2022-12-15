@@ -75,6 +75,11 @@ const statsTable = [
     year: 1766,
     review: 1.0079,
   },
+  {
+    name: 'Hydrogen9',
+    year: 1766,
+    review: 1.0079,
+  },
 ]
 
 function Home() {
@@ -170,7 +175,7 @@ function Home() {
               </Group>
             </Card.Section>
             <Card.Section inheritPadding py="xs">
-              <AspectRatio ratio={16 / 9}>
+              <AspectRatio ratio={16 / 10}>
                 <AreaChartComponent />
               </AspectRatio>
             </Card.Section>
@@ -183,7 +188,7 @@ function Home() {
                 <Text weight={500}>Simple Table</Text>
               </Group>
             </Card.Section>
-            <Card.Section inheritPadding py="xs">
+            <Card.Section inheritPadding py="xs" style={{ height: '100%' }}>
               <Table horizontalSpacing="sm" verticalSpacing="sm" style={{ height: '100%' }}>
                 <thead>
                   <tr>
