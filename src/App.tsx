@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
-import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core'
+import {
+  MantineProvider, ColorSchemeProvider, ColorScheme,
+} from '@mantine/core'
 
 import { useState } from 'react'
 import Home from '~/pages/Home'
@@ -16,7 +18,30 @@ function App() {
   return (
     <NavbarProvider>
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-        <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme }}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            colorScheme,
+            globalStyles: (theme) => ({
+              '::-webkit-scrollbar': {
+                width: '8px',
+              },
+              '::-webkit-scrollbar-track': {
+                background: 'transparent',
+              },
+              '::-webkit-scrollbar-thumb': {
+                border: `0px solid ${theme.colors.blue[1]}`,
+                backgroundClip: 'padding-box',
+                borderRadius: '9999px',
+                backgroundColor: theme.colors.blue[3],
+              },
+              '::-webkit-scrollbar-thumb:hover': {
+                backgroundColor: theme.colors.blue[4],
+              },
+            }),
+          }}
+        >
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />

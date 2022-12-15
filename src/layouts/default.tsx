@@ -20,6 +20,7 @@ const useStyles = createStyles((theme) => ({
   },
   content: {
     margin: theme.spacing.xl,
+    minHeight: '82vh',
   },
 }))
 

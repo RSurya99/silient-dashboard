@@ -8,7 +8,7 @@ const useStyles = createStyles((theme) => ({
     borderTop: `1px solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
     }`,
-    position: 'absolute',
+    position: 'relative',
     bottom: 0,
     right: 0,
     width: '100%',
