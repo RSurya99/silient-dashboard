@@ -112,7 +112,7 @@ const tableData = [
 function Home() {
   const { theme } = useStyles()
   const dispatch = useNavbarDispatch()
-  const [areaChartType, setAreaChartType] = useState<string | null>('monthly')
+  const [areaChartType, setAreaChartType] = useState<string>('monthly')
   const [segmentedValue, setSegmentedValue] = useState<string>('')
 
   useEffect(() => {
@@ -140,67 +140,19 @@ function Home() {
       <Grid columns={12} pb="md" gutter="lg">
         <Grid.Col span={8}>
           <Card withBorder shadow="xs" p="md" style={{ height: '100%' }}>
-            <Card.Section inheritPadding py="md">
+            <Card.Section withBorder inheritPadding py="xs">
               <Group position="apart">
                 <Text weight={500}>Basic Area Chart</Text>
-                <Tabs
-                  unstyled
-                  styles={(theme) => ({
-                    tab: {
-                      ...theme.fn.focusStyles(),
-                      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
-                      color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[9],
-                      border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[4]}`,
-                      padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
-                      cursor: 'pointer',
-                      fontSize: theme.fontSizes.sm,
-                      display: 'flex',
-                      alignItems: 'center',
-
-                      '&:disabled': {
-                        opacity: 0.5,
-                        cursor: 'not-allowed',
-                      },
-
-                      '&:not(:first-of-type)': {
-                        borderLeft: 0,
-                      },
-
-                      '&:first-of-type': {
-                        borderTopLeftRadius: theme.radius.sm,
-                        borderBottomLeftRadius: theme.radius.sm,
-                      },
-
-                      '&:last-of-type': {
-                        borderTopRightRadius: theme.radius.sm,
-                        borderBottomRightRadius: theme.radius.sm,
-                      },
-
-                      '&[data-active]': {
-                        backgroundColor: theme.colors.blue[6],
-                        borderColor: theme.colors.blue[6],
-                        color: theme.white,
-                      },
-                    },
-
-                    tabIcon: {
-                      marginRight: theme.spacing.xs,
-                      display: 'flex',
-                      alignItems: 'center',
-                    },
-
-                    tabsList: {
-                      display: 'flex',
-                    },
-                  })}
+                <SegmentedControl
+                  size="sm"
+                  color="blue"
                   value={areaChartType}
-                  onTabChange={setAreaChartType}
-                >
-                  <Tabs.List>
-                    <Tabs.Tab value="monthly">Monthly</Tabs.Tab>
-                    <Tabs.Tab value="yearly">Yearly</Tabs.Tab>
-                  </Tabs.List>
-                </Tabs>
+                  onChange={setAreaChartType}
+                  data={[
+                    { label: 'Monthly', value: 'monthly' },
+                    { label: 'Annual', value: 'annual' },
+                  ]}
+                />
               </Group>
             </Card.Section>
             <Card.Section inheritPadding py="xs">
@@ -212,9 +164,21 @@ function Home() {
         </Grid.Col>
         <Grid.Col span={4}>
           <Card withBorder shadow="xs" p="md" style={{ height: '100%' }}>
-            <Card.Section inheritPadding py="md">
+            <Card.Section withBorder inheritPadding py="md">
               <Group position="apart">
                 <Text weight={500}>Simple Table</Text>
+                <Menu shadow="md" width={200}>
+                  <Menu.Target>
+                    <ActionIcon>
+                      <IconDots size={18} />
+                    </ActionIcon>
+                  </Menu.Target>
+
+                  <Menu.Dropdown>
+                    <Menu.Item>Filter 1</Menu.Item>
+                    <Menu.Item>Filter 2</Menu.Item>
+                  </Menu.Dropdown>
+                </Menu>
               </Group>
             </Card.Section>
             <Card.Section inheritPadding py="xs" style={{ height: '100%' }}>
