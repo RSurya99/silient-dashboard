@@ -16,6 +16,7 @@ specifiers:
   '@mantine/prism': ^5.9.3
   '@mantine/spotlight': ^5.9.3
   '@mantine/tiptap': ^5.9.3
+  '@mantine/utils': ^5.9.4
   '@tabler/icons': ^1.116.1
   '@tiptap/extension-link': 2.0.0-beta.207
   '@tiptap/react': 2.0.0-beta.207
@@ -59,6 +60,7 @@ dependencies:
   '@mantine/prism': 5.9.3_sjagjo43i65pzqxzmiml53xcga
   '@mantine/spotlight': 5.9.3_sjagjo43i65pzqxzmiml53xcga
   '@mantine/tiptap': 5.9.3_ln4xc6gkx5ikxtayfw7rf7ivna
+  '@mantine/utils': 5.9.4_react@18.2.0
   '@tabler/icons': 1.116.1_biqbaboplfbrettd7655fr4n2y
   '@tiptap/extension-link': 2.0.0-beta.207
   '@tiptap/react': 2.0.0-beta.207_biqbaboplfbrettd7655fr4n2y
@@ -1117,6 +1119,14 @@ packages:
 
   /@mantine/utils/5.9.3_react@18.2.0:
     resolution: {integrity: sha512-03Km80wjeQX2LHYpNrJ+kWbTrLmp1fupOGzkUvuPtbhoA4C1Zd9JfGI1UuGHSYQFTwMXmzjkHS3K9PngqjTl+g==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /@mantine/utils/5.9.4_react@18.2.0:
+    resolution: {integrity: sha512-NZAn30jjF52X+MFnkO3oaVgo2LPx3o/QxYlcuMkRBUTZALEXvQgrD0OyGDRgEXnfMdmkBP6rk3Pol6yXXEwU6w==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:

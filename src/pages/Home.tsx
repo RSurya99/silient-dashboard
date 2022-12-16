@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react'
 import { useNavbarDispatch } from '~/context/navContext'
 import Stats from '~/components/Home/Stats'
-import { IconUser } from '@tabler/icons'
 import {
-  Grid, AspectRatio, Table, Card, Group, Text, Tabs,
+  IconUser, IconDots, IconArrowUp, IconInfoCircle,
+} from '@tabler/icons'
+import {
+  Grid, AspectRatio, Table, Card, Group, Text, Tabs, Menu, ActionIcon, createStyles,
 } from '@mantine/core'
-import AreaChartComponent from '~/components/Charts/Area'
+import AreaChart from '~/components/Charts/Area'
+import TinyAreaChart from '~/components/Charts/TinyArea'
+import DataTable from '~/components/Tables/DataTable'
+
+const useStyles = createStyles(() => ({
+
+}))
 
 const statsData = [
   {
@@ -82,7 +90,26 @@ const statsTable = [
   },
 ]
 
+const tableData = [
+  {
+    name: 'A1',
+    email: 'ab@a.id',
+    company: 'PT A'
+  },
+  {
+    name: 'A2',
+    email: 'ac@a.id',
+    company: 'PT A'
+  },
+  {
+    name: 'A3',
+    email: 'ad@a.id',
+    company: 'PT A'
+  },
+]
+
 function Home() {
+  const { theme } = useStyles()
   const dispatch = useNavbarDispatch()
   const [areaChartType, setAreaChartType] = useState<string | null>('monthly')
 
@@ -108,7 +135,7 @@ function Home() {
   return (
     <div>
       <Stats data={statsData} />
-      <Grid columns={12}>
+      <Grid columns={12} pb="md" gutter="lg">
         <Grid.Col span={8}>
           <Card withBorder shadow="xs" p="md" style={{ height: '100%' }}>
             <Card.Section inheritPadding py="md">
@@ -176,20 +203,110 @@ function Home() {
             </Card.Section>
             <Card.Section inheritPadding py="xs">
               <AspectRatio ratio={16 / 10}>
-                <AreaChartComponent />
+                <AreaChart />
               </AspectRatio>
             </Card.Section>
           </Card>
         </Grid.Col>
         <Grid.Col span={4}>
           <Card withBorder shadow="xs" p="md" style={{ height: '100%' }}>
-            <Card.Section inheritPadding pt="md" pb="0">
+            <Card.Section inheritPadding py="md">
               <Group position="apart">
                 <Text weight={500}>Simple Table</Text>
               </Group>
             </Card.Section>
             <Card.Section inheritPadding py="xs" style={{ height: '100%' }}>
-              <Table horizontalSpacing="sm" verticalSpacing="sm" style={{ height: '100%' }}>
+              <Table horizontalSpacing="sm" verticalSpacing="xs" style={{ height: '90%' }}>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Review</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {statsTableBody}
+                </tbody>
+              </Table>
+            </Card.Section>
+          </Card>
+        </Grid.Col>
+      </Grid>
+      <Grid columns={12} pb="md" gutter="lg">
+        <Grid.Col span={6}>
+          <Card withBorder shadow="xs" p="md" style={{ height: '100%' }}>
+            <Card.Section withBorder inheritPadding py="md">
+              <Group position="apart">
+                <Text weight={500}>Analytics</Text>
+                <Menu shadow="md" width={200}>
+                  <Menu.Target>
+                    <ActionIcon>
+                      <IconDots size={18} />
+                    </ActionIcon>
+                  </Menu.Target>
+
+                  <Menu.Dropdown>
+                    <Menu.Item>Filter 1</Menu.Item>
+                    <Menu.Item>Filter 2</Menu.Item>
+                  </Menu.Dropdown>
+                </Menu>
+              </Group>
+            </Card.Section>
+            <Card.Section inheritPadding py="xs">
+              <Grid columns={12} gutter="lg">
+                <Grid.Col span={6}>
+                  <Card p="xs" pb={0}>
+                    <Group align="center" spacing={4}>
+                      <Text weight={400} color="gray.6">Statistic</Text>
+                      <IconInfoCircle size={16} color={theme.colors.gray[6]} />
+                    </Group>
+                    <Group align="center" spacing="xl">
+                      <Text size="xl">12.727</Text>
+                      <Group align="center" spacing={2}>
+                        <Text size="sm" color="gray.5">17%</Text>
+                        <IconArrowUp size={20} color={theme.colors.green[6]} />
+                      </Group>
+                    </Group>
+                    <AspectRatio ratio={16 / 9}>
+                      <TinyAreaChart />
+                    </AspectRatio>
+                  </Card>
+                </Grid.Col>
+                <Grid.Col span={6}>
+                  <Card p="xs" pb={0}>
+                    <Group align="center" spacing={4}>
+                      <Text weight={400} color="gray.6">Statistic</Text>
+                      <IconInfoCircle size={16} color={theme.colors.gray[6]} />
+                    </Group>
+                    <Group align="center" spacing="xl">
+                      <Text size="xl">12.727</Text>
+                      <Group align="center" spacing={2}>
+                        <Text size="sm" color="gray.5">17%</Text>
+                        <IconArrowUp size={20} color={theme.colors.green[6]} />
+                      </Group>
+                    </Group>
+                    <AspectRatio ratio={16 / 9}>
+                      <TinyAreaChart />
+                    </AspectRatio>
+                  </Card>
+                </Grid.Col>
+              </Grid>
+            </Card.Section>
+            <Card.Section inheritPadding py="xs">
+              <DataTable data={tableData} withoutSearch />
+            </Card.Section>
+          </Card>
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <Card withBorder shadow="xs" p="md" style={{ height: '100%' }}>
+            <Card.Section inheritPadding py="md">
+              <Group position="apart">
+                <Text weight={500}>Simple Table</Text>
+              </Group>
+            </Card.Section>
+            <Card.Section inheritPadding py="xs" style={{ height: '100%' }}>
+              <Table horizontalSpacing="sm" verticalSpacing="xs" style={{ height: '90%' }}>
                 <thead>
                   <tr>
                     <th>No</th>

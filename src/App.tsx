@@ -25,19 +25,19 @@ function App() {
             colorScheme,
             globalStyles: (theme) => ({
               '::-webkit-scrollbar': {
-                width: '8px',
+                width: '6px',
               },
               '::-webkit-scrollbar-track': {
                 background: 'transparent',
               },
               '::-webkit-scrollbar-thumb': {
-                border: `0px solid ${theme.colors.blue[1]}`,
+                border: `0px solid ${theme.colors.blue[3]}`,
                 backgroundClip: 'padding-box',
                 borderRadius: '9999px',
-                backgroundColor: theme.colors.blue[3],
+                backgroundColor: theme.colors.blue[5],
               },
               '::-webkit-scrollbar-thumb:hover': {
-                backgroundColor: theme.colors.blue[4],
+                backgroundColor: theme.colors.blue[6],
               },
             }),
           }}

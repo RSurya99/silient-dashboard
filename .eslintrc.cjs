@@ -37,6 +37,7 @@ module.exports = {
       ignorePropertyModificationsFor: [
         'state',
       ],
+      'no-nested-ternary': 'off',
     }],
     'no-use-before-define': 'off',
     'import/prefer-default-export': 'off',
