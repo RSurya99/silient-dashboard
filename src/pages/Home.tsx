@@ -5,10 +5,11 @@ import {
   IconUser, IconDots, IconArrowUp, IconInfoCircle,
 } from '@tabler/icons'
 import {
-  Grid, AspectRatio, Table, Card, Group, Text, Tabs, Menu, ActionIcon, createStyles,
+  Grid, AspectRatio, Table, Card, Group, Text, Tabs, Menu, ActionIcon, createStyles, SegmentedControl, Center
 } from '@mantine/core'
 import AreaChart from '~/components/Charts/Area'
 import TinyAreaChart from '~/components/Charts/TinyArea'
+import PieChart from '~/components/Charts/Pie'
 import DataTable from '~/components/Tables/DataTable'
 
 const useStyles = createStyles(() => ({
@@ -112,6 +113,7 @@ function Home() {
   const { theme } = useStyles()
   const dispatch = useNavbarDispatch()
   const [areaChartType, setAreaChartType] = useState<string | null>('monthly')
+  const [segmentedValue, setSegmentedValue] = useState<string>('')
 
   useEffect(() => {
     if (dispatch) {
@@ -300,26 +302,29 @@ function Home() {
         </Grid.Col>
         <Grid.Col span={6}>
           <Card withBorder shadow="xs" p="md" style={{ height: '100%' }}>
-            <Card.Section inheritPadding py="md">
+            <Card.Section withBorder inheritPadding py="xs">
               <Group position="apart">
-                <Text weight={500}>Simple Table</Text>
+                <Text weight={500}>Proportion of sales category</Text>
+                <Group>
+                  <SegmentedControl
+                    size="sm"
+                    color="blue"
+                    value={segmentedValue}
+                    onChange={setSegmentedValue}
+                    data={[
+                      { label: 'All Channels', value: '' },
+                      { label: 'Online', value: 'online' },
+                      { label: 'Store', value: 'store' },
+                    ]}
+                  />
+                </Group>
               </Group>
             </Card.Section>
-            <Card.Section inheritPadding py="xs" style={{ height: '100%' }}>
-              <Table horizontalSpacing="sm" verticalSpacing="xs" style={{ height: '90%' }}>
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Year</th>
-                    <th>Review</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {statsTableBody}
-                </tbody>
-              </Table>
-            </Card.Section>
+            <Center style={{ width: '100%', height: '94%' }}>
+              <AspectRatio ratio={1/1} style={{ width: '400px' }}>
+                <PieChart />
+              </AspectRatio>
+            </Center>
           </Card>
         </Grid.Col>
       </Grid>
