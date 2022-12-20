@@ -11,10 +11,48 @@ import AreaChart from '~/components/Charts/Area'
 import TinyAreaChart from '~/components/Charts/TinyArea'
 import PieChart from '~/components/Charts/Pie'
 import DataTable from '~/components/Tables/DataTable'
+import SelectionTable from '~/components/Tables/SelectionTable'
+import StatsRingCard from '~/components/Card/StatsRing'
+import TaskCard from '~/components/Card/Task'
+import BadgeCard from '~/components/Card/Badges'
+import KanbanBoard from '~/components/Kanban'
 
 const useStyles = createStyles(() => ({
 
 }))
+
+const kanbanBoardData = [
+  { image: 'https://picsum.photos/200/300', "position": 6, "mass": 12.011, "symbol": "C", "name": "Carbon" },
+  { image: 'https://picsum.photos/200/300', "position": 7, "mass": 14.007, "symbol": "N", "name": "Nitrogen" },
+  { image: 'https://picsum.photos/200/300', "position": 39, "mass": 88.906, "symbol": "Y", "name": "Yttrium" },
+  { image: 'https://picsum.photos/200/300', "position": 56, "mass": 137.33, "symbol": "Ba", "name": "Barium" },
+  { image: 'https://picsum.photos/200/300', "position": 58, "mass": 140.12, "symbol": "Ce", "name": "Cerium" }
+]
+
+const badgeCardData = {
+  image: 'https://picsum.photos/200/300',
+  title: 'Total Users',
+  country: 'United States',
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  badges: [
+    {
+      emoji: '👍',
+      label: 'Good',
+    }
+  ]
+}
+
+const StatsRingCardData = {
+  title: 'Total Users',
+  completed: 30,
+  total: 100,
+  stats: [
+    {
+      value: 5,
+      label: 'Completed',
+    }
+  ]
+}
 
 const statsData = [
   {
@@ -109,6 +147,17 @@ const tableData = [
   },
 ]
 
+const selectionTableData: { avatar: string; name: string; email: string; job: string; id: string }[] = []
+for (let i = 0; i < 8; i++) {
+  selectionTableData.push({
+    id: (Math.floor(Math.random() * 100) + 69).toString(),
+    avatar: `https://avatars.dicebear.com/api/adventurer/${i + 1}.svg?b=%234294ff`,
+    name: `Name${Math.random().toString(36).substring(2, 10)}`,
+    email: `${Math.random().toString(36).substring(2, 10)}@example.com`,
+    job: `Job${Math.random().toString(36).substring(2, 10)}`
+  });
+}
+
 function Home() {
   const { theme } = useStyles()
   const dispatch = useNavbarDispatch()
@@ -124,6 +173,8 @@ function Home() {
         ],
       })
     }
+
+    console.log('masuk sini')
   }, [])
   const statsTableBody = statsTable.map((element, idx) => (
     <tr key={element.name}>
@@ -198,8 +249,6 @@ function Home() {
             </Card.Section>
           </Card>
         </Grid.Col>
-      </Grid>
-      <Grid columns={12} pb="md" gutter="lg">
         <Grid.Col span={6}>
           <Card withBorder shadow="xs" p="md" style={{ height: '100%' }}>
             <Card.Section withBorder inheritPadding py="md">
@@ -290,6 +339,26 @@ function Home() {
               </AspectRatio>
             </Center>
           </Card>
+        </Grid.Col>
+        <Grid.Col span={6}>
+          <Card withBorder shadow="xs" p="sm" style={{ height: '100%' }}>
+            <SelectionTable data={selectionTableData} />
+          </Card>
+        </Grid.Col>
+        <Grid.Col span={3}>
+          <Card withBorder shadow="xs" p="md" style={{ height: '100%' }}>
+            <Card.Section withBorder inheritPadding py="md">
+              <Group position="apart">
+                <Text weight={500}>Kanban Board</Text>
+              </Group>
+            </Card.Section>
+            <Card.Section inheritPadding py="md">
+              <KanbanBoard data={kanbanBoardData} />
+            </Card.Section>
+          </Card>
+        </Grid.Col>
+        <Grid.Col span={3}>
+          <BadgeCard {...badgeCardData} />
         </Grid.Col>
       </Grid>
     </div>

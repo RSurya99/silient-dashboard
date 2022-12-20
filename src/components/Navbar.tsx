@@ -9,6 +9,12 @@ import {
   Text,
   ActionIcon,
   useMantineColorScheme,
+Indicator,
+Drawer,
+Alert,
+Paper,
+Grid,
+ScrollArea,
 } from '@mantine/core'
 import {
   IconSearch,
@@ -24,6 +30,9 @@ import {
   IconMoonStars,
   IconSun,
   IconMenu2,
+  IconBell,
+  IconLanguage,
+IconAlertCircle,
 } from '@tabler/icons'
 import { useState } from 'react'
 import type { User } from '~/types/navbar'
@@ -80,7 +89,7 @@ const useStyles = createStyles((theme) => ({
 
   user: {
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
-    padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
+    padding: `${theme.spacing.xs}px ${theme.spacing.xs}px`,
     borderRadius: theme.radius.sm,
     transition: 'background-color 100ms ease',
 
@@ -108,6 +117,7 @@ function Navbar() {
       dispatch({ type: 'UPDATE_SIDEBAR_TOGGLE', sidebarToggle: !sidebarToggle })
     }
   }
+  const [opened, setOpened] = useState(false);
   // async dispatch
   // const action2 = () => {
   //   if (dispatch) {
@@ -122,90 +132,145 @@ function Navbar() {
   const dark = colorScheme === 'dark'
 
   return (
-    <Header height={56} className={classes.header} pb={60}>
-      <div className={classes.inner}>
-        <Group>
-          <ActionIcon
-            size="lg"
-            variant="transparent"
-            onClick={onClickSidebarToggle}
-            color="primaryColor"
-          >
-            <IconMenu2 size={20} />
-          </ActionIcon>
-          <Text color="dark.7" size="lg" weight={600}>Dashboard</Text>
-        </Group>
+    <>
+      <Drawer
+        opened={opened}
+        position="right"
+        onClose={() => setOpened(false)}
+        title="Notifications"
+        padding="lg"
+        size="xl"
+        zIndex={1002}
+      >
+        <ScrollArea offsetScrollbars style={{ height: '90vh' }}>
+          <Grid columns={1} gutter="sm">
+          {new Array(5).fill('').map((_, index) => (
+            <Grid.Col key={index}>
+              <Alert icon={<IconAlertCircle size={16} />} title="Bummer!" color={index % 2 === 0 ? 'red' : 'green'} withCloseButton>
+                Something terrible happened! You made a mistake and your data was lost forever!
+              </Alert>
+            </Grid.Col>
+          ))}
+          </Grid>
+        </ScrollArea>
+      </Drawer>
+      <Header height={56} className={classes.header} pb={60}>
+        <div className={classes.inner}>
+          <Group>
+            <ActionIcon
+              size="lg"
+              variant="transparent"
+              onClick={onClickSidebarToggle}
+              color="primaryColor"
+            >
+              <IconMenu2 size={20} />
+            </ActionIcon>
+            <Text color="dark.7" size="lg" weight={600}>Dashboard</Text>
+          </Group>
 
-        <Group>
-          <Autocomplete
-            className={classes.search}
-            placeholder="Search"
-            icon={<IconSearch size={20} stroke={1.5} />}
-            data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
-          />
+          <Group spacing="xs">
+            <Autocomplete
+              className={classes.search}
+              placeholder="Search"
+              icon={<IconSearch size={20} stroke={1.5} />}
+              data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
+            />
 
-          <ActionIcon
-            size="lg"
-            variant="outline"
-            color={dark ? 'yellow' : 'blue'}
-            onClick={() => toggleColorScheme()}
-            title="Toggle color scheme"
-          >
-            {dark ? <IconSun size={20} /> : <IconMoonStars size={20} />}
-          </ActionIcon>
-
-          <Menu
-            width={260}
-            position="bottom-end"
-            transition="pop-top-right"
-            onClose={() => setUserMenuOpened(false)}
-            onOpen={() => setUserMenuOpened(true)}
-          >
-            <Menu.Target>
-              <UnstyledButton
-                className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
+            <ActionIcon
+              size="lg"
+              variant="outline"
+              color={dark ? 'yellow' : 'blue'}
+              onClick={() => toggleColorScheme()}
+              title="Toggle color scheme"
+            >
+              {dark ? <IconSun size={20} /> : <IconMoonStars size={20} />}
+            </ActionIcon>
+            <Indicator>
+              <ActionIcon
+                size="lg"
+                variant="outline"
+                color="blue"
+                title="Toggle color scheme"
+                onClick={() => setOpened(true)}
               >
-                <Group spacing={7}>
-                  <Avatar src={user.image} alt={user.name} radius="xl" size={24} />
-                  <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                    {user.name}
-                  </Text>
-                  <IconChevronDown size={14} stroke={1.5} />
-                </Group>
-              </UnstyledButton>
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Menu.Item icon={<IconHeart size={14} color={theme.colors.red[6]} stroke={1.5} />}>
-                Liked posts
-              </Menu.Item>
-              <Menu.Item icon={<IconStar size={14} color={theme.colors.yellow[6]} stroke={1.5} />}>
-                Saved posts
-              </Menu.Item>
-              <Menu.Item icon={<IconMessage size={14} color={theme.colors.blue[6]} stroke={1.5} />}>
-                Your comments
-              </Menu.Item>
+                <IconBell size={20} />
+              </ActionIcon>
+            </Indicator>
+            <Menu shadow="md" width={125} position="bottom-end" transition="pop-top-right">
+              <Menu.Target>
+                <div style={{ padding: `${theme.spacing.xs}px 0` }}>
+                  <ActionIcon
+                    size="lg"
+                    variant="outline"
+                    color="blue"
+                    title="Toggle color scheme"
+                  >
+                    <IconLanguage size={20} />
+                  </ActionIcon>
+                </div>
+              </Menu.Target>
 
-              <Menu.Label>Settings</Menu.Label>
-              <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}>Account settings</Menu.Item>
-              <Menu.Item icon={<IconSwitchHorizontal size={14} stroke={1.5} />}>
-                Change account
-              </Menu.Item>
-              <Menu.Item icon={<IconLogout size={14} stroke={1.5} />}>Logout</Menu.Item>
+              <Menu.Dropdown>
+                <Menu.Item icon={<Text size="xs" color="dimmed">EN</Text>}>English</Menu.Item>
+                <Menu.Item icon={<Text size="xs" color="dimmed">ID</Text>}>Indonesia</Menu.Item>
+                <Menu.Item icon={<Text size="xs" color="dimmed">JP</Text>}>Japanese</Menu.Item>
+                <Menu.Item icon={<Text size="xs" color="dimmed">CN</Text>}>Chinese</Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
 
-              <Menu.Divider />
+            <Menu
+              width={260}
+              position="bottom-end"
+              transition="pop-top-right"
+              onClose={() => setUserMenuOpened(false)}
+              onOpen={() => setUserMenuOpened(true)}
+            >
+              <Menu.Target>
+                <UnstyledButton
+                  className={cx(classes.user, { [classes.userActive]: userMenuOpened })}
+                >
+                  <Group spacing={7}>
+                    <Avatar src={user.image} alt={user.name} radius="xl" size={28} />
+                    <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
+                      {user.name}
+                    </Text>
+                    <IconChevronDown size={14} stroke={1.5} />
+                  </Group>
+                </UnstyledButton>
+              </Menu.Target>
+              <Menu.Dropdown>
+                <Menu.Item icon={<IconHeart size={14} color={theme.colors.red[6]} stroke={1.5} />}>
+                  Liked posts
+                </Menu.Item>
+                <Menu.Item icon={<IconStar size={14} color={theme.colors.yellow[6]} stroke={1.5} />}>
+                  Saved posts
+                </Menu.Item>
+                <Menu.Item icon={<IconMessage size={14} color={theme.colors.blue[6]} stroke={1.5} />}>
+                  Your comments
+                </Menu.Item>
 
-              <Menu.Label>Danger zone</Menu.Label>
-              <Menu.Item icon={<IconPlayerPause size={14} stroke={1.5} />}>
-                Pause subscription
-              </Menu.Item>
-              <Menu.Item color="red" icon={<IconTrash size={14} stroke={1.5} />}>
-                Delete account
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
-        </Group>
-      </div>
-    </Header>
+                <Menu.Label>Settings</Menu.Label>
+                <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}>Account settings</Menu.Item>
+                <Menu.Item icon={<IconSwitchHorizontal size={14} stroke={1.5} />}>
+                  Change account
+                </Menu.Item>
+                <Menu.Item icon={<IconLogout size={14} stroke={1.5} />}>Logout</Menu.Item>
+
+                <Menu.Divider />
+
+                <Menu.Label>Danger zone</Menu.Label>
+                <Menu.Item icon={<IconPlayerPause size={14} stroke={1.5} />}>
+                  Pause subscription
+                </Menu.Item>
+                <Menu.Item color="red" icon={<IconTrash size={14} stroke={1.5} />}>
+                  Delete account
+                </Menu.Item>
+              </Menu.Dropdown>
+            </Menu>
+          </Group>
+        </div>
+      </Header>
+    </>
   )
 }
 
