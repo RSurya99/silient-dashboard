@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Group, Box, Collapse, ThemeIcon, Text, createStyles, UnstyledButton, Anchor,
 } from '@mantine/core'
@@ -71,12 +71,16 @@ export default function LinksGroup({
   const [opened, setOpened] = useState(initiallyOpened || false)
   const ChevronIcon = theme.dir === 'ltr' ? IconChevronRight : IconChevronLeft
   const SidebarItemProps: any = {}
-  if (href) {
-    const isExternal = href.includes('http')
-    SidebarItemProps.component = isExternal ? Anchor : Link
-    SidebarItemProps[isExternal ? 'href' : 'to'] = href
-    if (isExternal) SidebarItemProps.target = '_blank'
-  }
+
+  useEffect(() => {
+    if (href) {
+      const isExternal = href.includes('http')
+      SidebarItemProps.component = isExternal ? Anchor : Link
+      SidebarItemProps[isExternal ? 'href' : 'to'] = href
+      if (isExternal) SidebarItemProps.target = '_blank'
+    }
+  }, [])
+  
   const items = (hasLinks ? links : []).map((link) => (
     <Text
       component={Link}
@@ -87,6 +91,12 @@ export default function LinksGroup({
       {link.label}
     </Text>
   ))
+
+  useEffect(() => {
+    if(links){
+      setOpened(links.some((link) => link.link === location.pathname))
+    }
+  }, [location.pathname])
 
   return (
     <>

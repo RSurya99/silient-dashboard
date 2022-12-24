@@ -12,7 +12,7 @@ const useStyles = createStyles((theme) => ({
     width: '100%',
     position: 'relative',
     height: '100vh',
-    overflowY: 'auto',
+    overflowY: 'auto'
   },
   wrapper: {
     overflow: 'hidden',

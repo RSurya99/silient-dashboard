@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text } from '@mantine/core';
+import { createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text, Badge } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -11,7 +11,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface TableSelectionProps {
-  data: { avatar: string; name: string; email: string; job: string; id: string }[];
+  data: { avatar: string; name: string; email: string; status: string; id: string }[];
 }
 
 function TableSelection({ data }: TableSelectionProps) {
@@ -44,7 +44,7 @@ function TableSelection({ data }: TableSelectionProps) {
           </Group>
         </td>
         <td>{item.email}</td>
-        <td>{item.job}</td>
+        <td><Badge color={item.status === 'active' ? 'green' : 'red'}>{item.status}</Badge></td>
       </tr>
     );
   });
@@ -64,7 +64,7 @@ function TableSelection({ data }: TableSelectionProps) {
             </th>
             <th>User</th>
             <th>Email</th>
-            <th>Job</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>

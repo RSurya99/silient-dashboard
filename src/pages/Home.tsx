@@ -26,7 +26,7 @@ const kanbanBoardData = [
   { image: 'https://picsum.photos/200/300', "position": 7, "mass": 14.007, "symbol": "N", "name": "Nitrogen" },
   { image: 'https://picsum.photos/200/300', "position": 39, "mass": 88.906, "symbol": "Y", "name": "Yttrium" },
   { image: 'https://picsum.photos/200/300', "position": 56, "mass": 137.33, "symbol": "Ba", "name": "Barium" },
-  { image: 'https://picsum.photos/200/300', "position": 58, "mass": 140.12, "symbol": "Ce", "name": "Cerium" }
+  { image: 'https://picsum.photos/200/300', "position": 58, "mass": 140.12, "symbol": "Ce", "name": "Cerium" },
 ]
 
 const badgeCardData = {
@@ -147,14 +147,14 @@ const tableData = [
   },
 ]
 
-const selectionTableData: { avatar: string; name: string; email: string; job: string; id: string }[] = []
+const selectionTableData: { avatar: string; name: string; email: string; status: string; id: string }[] = []
 for (let i = 0; i < 8; i++) {
   selectionTableData.push({
     id: (Math.floor(Math.random() * 100) + 69).toString(),
     avatar: `https://avatars.dicebear.com/api/adventurer/${i + 1}.svg?b=%234294ff`,
     name: `Name${Math.random().toString(36).substring(2, 10)}`,
     email: `${Math.random().toString(36).substring(2, 10)}@example.com`,
-    job: `Job${Math.random().toString(36).substring(2, 10)}`
+    status: i % 2 === 1 ? 'active' : 'inactive',
   });
 }
 

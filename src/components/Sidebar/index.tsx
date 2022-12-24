@@ -69,12 +69,22 @@ const mockdata = [
       { label: 'Account Settings', link: '/account/settings' },
     ],
   },
+  {
+    label: 'Authentication Pages',
+    icon: IconUser,
+    links: [
+      { label: 'Login', link: '/auth/login' },
+      { label: 'Register', link: '/auth/register' },
+      { label: 'Forgot Password', link: '/auth/forgot-password' },
+      { label: 'Reset Password', link: '/auth/reset-password' },
+    ],
+  },
   { label: 'Donate', icon: IconHeartHandshake, link: 'https://github.com/rsurya99' },
 ]
 
 const useStyles = createStyles((theme) => ({
   navbar: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.white,
     paddingBottom: 0,
     position: 'sticky',
     top: 0,
