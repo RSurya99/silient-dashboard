@@ -16,6 +16,7 @@ import StatsRingCard from '~/components/Card/StatsRing'
 import TaskCard from '~/components/Card/Task'
 import BadgeCard from '~/components/Card/Badges'
 import KanbanBoard from '~/components/Kanban'
+import { v4 as uuidv4 } from 'uuid';
 
 const useStyles = createStyles(() => ({
 
@@ -150,7 +151,7 @@ const tableData = [
 const selectionTableData: { avatar: string; name: string; email: string; status: string; id: string }[] = []
 for (let i = 0; i < 8; i++) {
   selectionTableData.push({
-    id: (Math.floor(Math.random() * 100) + 69).toString(),
+    id: uuidv4(),
     avatar: `https://avatars.dicebear.com/api/adventurer/${i + 1}.svg?b=%234294ff`,
     name: `Name${Math.random().toString(36).substring(2, 10)}`,
     email: `${Math.random().toString(36).substring(2, 10)}@example.com`,

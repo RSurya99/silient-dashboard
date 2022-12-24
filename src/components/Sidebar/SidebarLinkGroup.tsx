@@ -70,16 +70,22 @@ export default function LinksGroup({
   const hasLinks = Array.isArray(links)
   const [opened, setOpened] = useState(initiallyOpened || false)
   const ChevronIcon = theme.dir === 'ltr' ? IconChevronRight : IconChevronLeft
-  const SidebarItemProps: any = {}
+  const [sidebarItemProps, setSidebarItemProps] = useState({})
 
   useEffect(() => {
     if (href) {
+      console.log('href', href)
       const isExternal = href.includes('http')
-      SidebarItemProps.component = isExternal ? Anchor : Link
-      SidebarItemProps[isExternal ? 'href' : 'to'] = href
-      if (isExternal) SidebarItemProps.target = '_blank'
+      console.log('isExternal', isExternal)
+      setSidebarItemProps({
+        ...sidebarItemProps,
+        component: isExternal ? Anchor : Link,
+        target: isExternal ? '_blank' : undefined,
+        [isExternal ? 'href' : 'to']: href,
+      })
+      console.log('sidebarItemProps dsa', sidebarItemProps)
     }
-  }, [])
+  }, [href])
   
   const items = (hasLinks ? links : []).map((link) => (
     <Text
@@ -103,7 +109,7 @@ export default function LinksGroup({
       <UnstyledButton
         onClick={() => setOpened((o) => !o)}
         className={cx(classes.control, { [classes.controlActive]: location.pathname === href })}
-        {...SidebarItemProps}
+        {...sidebarItemProps}
       >
         <Group position="apart" spacing={0}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
