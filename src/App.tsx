@@ -7,9 +7,12 @@ import { useState } from 'react'
 import Home from '~/pages/Home'
 import NoMatch from '~/pages/NoMatch'
 import Layout from '~/layouts/default'
+import BlankLayout from '~/layouts/blank'
 import { NavbarProvider } from '~/context/navContext'
 import Forbidden from '~/pages/Forbidden'
 import ServerError from '~/pages/ServerError'
+import SignIn from './pages/auth/SignIn'
+import SignUp from './pages/auth/SignUp'
 
 function App() {
   const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
@@ -45,11 +48,17 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="/pages/404" element={<NoMatch />} />
-              <Route path="/pages/403" element={<Forbidden />} />
-              <Route path="/pages/500" element={<ServerError />} />
-              <Route path="*" element={<NoMatch />} />
             </Route>
+            <Route path="/auth" element={<BlankLayout />}>
+              <Route path="signin" element={<SignIn />} />
+              <Route path="signup" element={<SignUp />} />
+            </Route>
+            <Route path="/error" element={<BlankLayout />}>
+              <Route path="404" element={<NoMatch />} />
+              <Route path="403" element={<Forbidden />} />
+              <Route path="500" element={<ServerError />} />
+            </Route>
+            <Route path="*" element={<NoMatch />} />
           </Routes>
         </MantineProvider>
       </ColorSchemeProvider>

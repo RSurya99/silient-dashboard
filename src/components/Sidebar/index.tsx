@@ -5,6 +5,7 @@ import {
   IconGauge,
   IconComponents,
   IconIcons,
+  IconLock,
   IconChartPie,
   IconTable,
   IconError404,
@@ -56,9 +57,9 @@ const mockdata = [
     label: 'Error Pages',
     icon: IconError404,
     links: [
-      { label: '403', link: '/pages/403' },
-      { label: '404', link: '/pages/404' },
-      { label: '500', link: '/pages/500' },
+      { label: '403', link: '/error/403' },
+      { label: '404', link: '/error/404' },
+      { label: '500', link: '/error/500' },
     ],
   },
   {
@@ -71,10 +72,10 @@ const mockdata = [
   },
   {
     label: 'Authentication Pages',
-    icon: IconUser,
+    icon: IconLock,
     links: [
-      { label: 'Login', link: '/auth/login' },
-      { label: 'Register', link: '/auth/register' },
+      { label: 'Sign In', link: '/auth/signin' },
+      { label: 'Sign Up', link: '/auth/signup' },
       { label: 'Forgot Password', link: '/auth/forgot-password' },
       { label: 'Reset Password', link: '/auth/reset-password' },
     ],

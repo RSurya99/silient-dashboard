@@ -173,8 +173,6 @@ function Home() {
         ],
       })
     }
-
-    console.log('masuk sini')
   }, [])
   const statsTableBody = statsTable.map((element, idx) => (
     <tr key={element.name}>
