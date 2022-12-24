@@ -13,6 +13,8 @@ import Forbidden from '~/pages/Forbidden'
 import ServerError from '~/pages/ServerError'
 import SignIn from './pages/auth/SignIn'
 import SignUp from './pages/auth/SignUp'
+import ForgotPassword from './pages/auth/ForgotPassword'
+import ResetPassword from './pages/auth/ResetPassword'
 
 function App() {
   const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
@@ -52,6 +54,8 @@ function App() {
             <Route path="/auth" element={<BlankLayout />}>
               <Route path="signin" element={<SignIn />} />
               <Route path="signup" element={<SignUp />} />
+              <Route path="forgot-password" element={<ForgotPassword />} />
+              <Route path="reset-password" element={<ResetPassword />} />
             </Route>
             <Route path="/error" element={<BlankLayout />}>
               <Route path="404" element={<NoMatch />} />
