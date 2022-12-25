@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DynamicTable = () => {
+function DynamicTable() {
   return (
     <div>DynamicTable</div>
   )

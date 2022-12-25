@@ -1,10 +1,12 @@
-import { IconHeart } from '@tabler/icons';
-import { Card, Image, Text, Group, Badge, Button, ActionIcon, createStyles } from '@mantine/core';
+import { IconHeart } from '@tabler/icons'
+import {
+  Card, Image, Text, Group, Badge, Button, ActionIcon, createStyles,
+} from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
   card: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
-    height: '100%'
+    height: '100%',
   },
 
   section: {
@@ -25,7 +27,7 @@ const useStyles = createStyles((theme) => ({
     fontSize: theme.fontSizes.xs,
     fontWeight: 700,
   },
-}));
+}))
 
 interface BadgeCardProps {
   image: string;
@@ -38,8 +40,10 @@ interface BadgeCardProps {
   }[];
 }
 
-function BadgeCard({ image, title, description, country, badges }: BadgeCardProps) {
-  const { classes, theme } = useStyles();
+function BadgeCard({
+  image, title, description, country, badges,
+}: BadgeCardProps) {
+  const { classes, theme } = useStyles()
 
   const features = badges.map((badge) => (
     <Badge
@@ -49,7 +53,7 @@ function BadgeCard({ image, title, description, country, badges }: BadgeCardProp
     >
       {badge.label}
     </Badge>
-  ));
+  ))
 
   return (
     <Card withBorder radius="sm" p="md" shadow="xs" className={classes.card}>
@@ -87,7 +91,7 @@ function BadgeCard({ image, title, description, country, badges }: BadgeCardProp
         </ActionIcon>
       </Group>
     </Card>
-  );
+  )
 }
 
 export default BadgeCard

@@ -1,4 +1,6 @@
-import { createStyles, Text, Card, RingProgress, Group } from '@mantine/core';
+import {
+  createStyles, Text, Card, RingProgress, Group,
+} from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -36,7 +38,7 @@ const useStyles = createStyles((theme) => ({
       marginTop: theme.spacing.md,
     },
   },
-}));
+}))
 
 interface StatsRingCardProps {
   title: string;
@@ -48,8 +50,10 @@ interface StatsRingCardProps {
   }[];
 }
 
-function StatsRingCard({ title, completed, total, stats }: StatsRingCardProps) {
-  const { classes, theme } = useStyles();
+function StatsRingCard({
+  title, completed, total, stats,
+}: StatsRingCardProps) {
+  const { classes, theme } = useStyles()
   const items = stats.map((stat) => (
     <div key={stat.label}>
       <Text className={classes.label}>{stat.value}</Text>
@@ -57,7 +61,7 @@ function StatsRingCard({ title, completed, total, stats }: StatsRingCardProps) {
         {stat.label}
       </Text>
     </div>
-  ));
+  ))
 
   return (
     <Card withBorder p="xl" radius="md" className={classes.card}>
@@ -83,21 +87,22 @@ function StatsRingCard({ title, completed, total, stats }: StatsRingCardProps) {
             thickness={6}
             size={150}
             sections={[{ value: (completed / total) * 100, color: theme.primaryColor }]}
-            label={
+            label={(
               <div>
                 <Text align="center" size="lg" className={classes.label} sx={{ fontSize: 22 }}>
-                  {((completed / total) * 100).toFixed(0)}%
+                  {((completed / total) * 100).toFixed(0)}
+                  %
                 </Text>
                 <Text align="center" size="xs" color="dimmed">
                   Completed
                 </Text>
               </div>
-            }
+            )}
           />
         </div>
       </div>
     </Card>
-  );
+  )
 }
 
 export default StatsRingCard

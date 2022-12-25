@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AdvancedForm = () => {
+function AdvancedForm() {
   return (
     <div>AdvancedForm</div>
   )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CardComponent = () => {
+function CardComponent() {
   return (
     <div>CardComponent</div>
   )

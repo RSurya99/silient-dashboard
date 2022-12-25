@@ -1,9 +1,9 @@
-import { Button, ButtonProps, Group } from '@mantine/core';
-import { GoogleIcon } from './GoogleIcon';
-import { FacebookIcon } from './FacebookIcon';
+import { Button, ButtonProps, Group } from '@mantine/core'
+import { GoogleIcon } from './GoogleIcon'
+import { FacebookIcon } from './FacebookIcon'
 
 export function GoogleButton(props: ButtonProps) {
-  return <Button leftIcon={<GoogleIcon />} variant="default" {...props} />;
+  return <Button leftIcon={<GoogleIcon />} variant="default" {...props} />
 }
 
 export function FacebookButton(props: ButtonProps) {
@@ -13,7 +13,7 @@ export function FacebookButton(props: ButtonProps) {
       variant="default"
       {...props}
     />
-  );
+  )
 }
 
 export function SocialButtons() {
@@ -22,5 +22,5 @@ export function SocialButtons() {
       <GoogleButton>Continue with Google</GoogleButton>
       <FacebookButton>Sign in with Facebook</FacebookButton>
     </Group>
-  );
+  )
 }

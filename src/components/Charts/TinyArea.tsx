@@ -1,4 +1,6 @@
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  AreaChart, Area, ResponsiveContainer,
+} from 'recharts'
 
 const data = [
   {
@@ -43,10 +45,9 @@ const data = [
     pv: 4300,
     amt: 2100,
   },
-];
+]
 
-
-const TinyArea = () => {
+function TinyArea() {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart

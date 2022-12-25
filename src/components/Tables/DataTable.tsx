@@ -8,7 +8,7 @@ import {
   Text,
   Center,
   TextInput,
-Pagination,
+  Pagination,
 } from '@mantine/core'
 import { keys } from '@mantine/utils'
 import {

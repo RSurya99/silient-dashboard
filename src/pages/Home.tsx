@@ -5,29 +5,37 @@ import {
   IconUser, IconDots, IconArrowUp, IconInfoCircle,
 } from '@tabler/icons'
 import {
-  Grid, AspectRatio, Table, Card, Group, Text, Tabs, Menu, ActionIcon, createStyles, SegmentedControl, Center
+  Grid, AspectRatio, Table, Card, Group, Text, Menu, ActionIcon, createStyles, SegmentedControl, Center,
 } from '@mantine/core'
 import AreaChart from '~/components/Charts/Area'
 import TinyAreaChart from '~/components/Charts/TinyArea'
 import PieChart from '~/components/Charts/Pie'
 import DataTable from '~/components/Tables/DataTable'
 import SelectionTable from '~/components/Tables/SelectionTable'
-import StatsRingCard from '~/components/Card/StatsRing'
-import TaskCard from '~/components/Card/Task'
 import BadgeCard from '~/components/Card/Badges'
 import KanbanBoard from '~/components/Kanban'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 
 const useStyles = createStyles(() => ({
 
 }))
 
 const kanbanBoardData = [
-  { image: 'https://picsum.photos/200/300', "position": 6, "mass": 12.011, "symbol": "C", "name": "Carbon" },
-  { image: 'https://picsum.photos/200/300', "position": 7, "mass": 14.007, "symbol": "N", "name": "Nitrogen" },
-  { image: 'https://picsum.photos/200/300', "position": 39, "mass": 88.906, "symbol": "Y", "name": "Yttrium" },
-  { image: 'https://picsum.photos/200/300', "position": 56, "mass": 137.33, "symbol": "Ba", "name": "Barium" },
-  { image: 'https://picsum.photos/200/300', "position": 58, "mass": 140.12, "symbol": "Ce", "name": "Cerium" },
+  {
+    image: 'https://picsum.photos/200/300', position: 6, mass: 12.011, symbol: 'C', name: 'Carbon',
+  },
+  {
+    image: 'https://picsum.photos/200/300', position: 7, mass: 14.007, symbol: 'N', name: 'Nitrogen',
+  },
+  {
+    image: 'https://picsum.photos/200/300', position: 39, mass: 88.906, symbol: 'Y', name: 'Yttrium',
+  },
+  {
+    image: 'https://picsum.photos/200/300', position: 56, mass: 137.33, symbol: 'Ba', name: 'Barium',
+  },
+  {
+    image: 'https://picsum.photos/200/300', position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium',
+  },
 ]
 
 const badgeCardData = {
@@ -39,20 +47,8 @@ const badgeCardData = {
     {
       emoji: '👍',
       label: 'Good',
-    }
-  ]
-}
-
-const StatsRingCardData = {
-  title: 'Total Users',
-  completed: 30,
-  total: 100,
-  stats: [
-    {
-      value: 5,
-      label: 'Completed',
-    }
-  ]
+    },
+  ],
 }
 
 const statsData = [
@@ -134,17 +130,17 @@ const tableData = [
   {
     name: 'A1',
     email: 'ab@a.id',
-    company: 'PT A'
+    company: 'PT A',
   },
   {
     name: 'A2',
     email: 'ac@a.id',
-    company: 'PT A'
+    company: 'PT A',
   },
   {
     name: 'A3',
     email: 'ad@a.id',
-    company: 'PT A'
+    company: 'PT A',
   },
 ]
 
@@ -156,7 +152,7 @@ for (let i = 0; i < 8; i++) {
     name: `Name${Math.random().toString(36).substring(2, 10)}`,
     email: `${Math.random().toString(36).substring(2, 10)}@example.com`,
     status: i % 2 === 1 ? 'active' : 'inactive',
-  });
+  })
 }
 
 function Home() {
@@ -333,7 +329,7 @@ function Home() {
               </Group>
             </Card.Section>
             <Center style={{ width: '100%', height: '94%' }}>
-              <AspectRatio ratio={1/1} style={{ width: '400px' }}>
+              <AspectRatio ratio={1 / 1} style={{ width: '400px' }}>
                 <PieChart />
               </AspectRatio>
             </Center>

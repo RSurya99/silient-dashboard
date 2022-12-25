@@ -49,6 +49,7 @@ export async function asyncUpdate(dispatch: Dispatch<NavbarAction>, sidebarToggl
     })
     dispatch({ type: 'UPDATE_SIDEBAR_TOGGLE', sidebarToggle })
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log('err', err)
   }
 }

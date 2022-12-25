@@ -32,15 +32,21 @@ module.exports = {
     'linebreak-style': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/require-default-props': 'off',
-    'no-param-reassign': ['error', {
-      props: true,
-      ignorePropertyModificationsFor: [
-        'state',
-      ],
-      'no-nested-ternary': 'off',
-    }],
+    'react/no-array-index-key': 'off',
+    // 'no-param-reassign': ['error', {
+    //   props: true,
+    //   ignorePropertyModificationsFor: [
+    //     'state',
+    //   ],
+    //   'no-nested-ternary': 'off',
+    // }],
     'no-use-before-define': 'off',
     'import/prefer-default-export': 'off',
+    'no-console': 'warn',
+    'no-unused-vars': 'warn',
+    'no-nested-ternary': 'off',
+    'max-len': ['off', { code: 120 }],
+    'no-plusplus': 'off',
   },
   settings: {
     'import/resolver': {

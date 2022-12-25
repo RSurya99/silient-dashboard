@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SimpleTable = () => {
+function SimpleTable() {
   return (
     <div>SimpleTable</div>
   )

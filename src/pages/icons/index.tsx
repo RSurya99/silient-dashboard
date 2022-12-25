@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Icons = () => {
+function Icons() {
   return (
     <div>Icons</div>
   )

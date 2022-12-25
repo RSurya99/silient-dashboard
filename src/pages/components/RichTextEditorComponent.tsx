@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RichTextEditorComponent = () => {
+function RichTextEditorComponent() {
   return (
     <div>RichTextEditorComponent</div>
   )

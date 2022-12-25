@@ -1,7 +1,6 @@
 import {
   createStyles,
   Header,
-  Autocomplete,
   Group,
   Menu,
   Avatar,
@@ -9,44 +8,36 @@ import {
   Text,
   ActionIcon,
   useMantineColorScheme,
-Indicator,
-Drawer,
-Alert,
-Paper,
-Grid,
-ScrollArea,
-TextInput,
-Kbd,
+  Indicator,
+  Drawer,
+  Alert,
+  Grid,
+  ScrollArea,
+  TextInput,
+  Kbd,
 } from '@mantine/core'
 import {
   IconSearch,
   IconChevronDown,
-  IconHeart,
-  IconStar,
-  IconMessage,
   IconSwitchHorizontal,
   IconSettings,
   IconLogout,
-  IconPlayerPause,
-  IconTrash,
   IconMoonStars,
   IconSun,
   IconMenu2,
   IconBell,
   IconLanguage,
-IconAlertCircle,
-IconUser,
-IconUserCircle,
-IconDashboard,
-IconFileText,
-IconHome,
+  IconAlertCircle,
+  IconUserCircle,
+  IconDashboard,
+  IconFileText,
 } from '@tabler/icons'
 import { useState } from 'react'
 import type { User } from '~/types/navbar'
 import { useNavbar, useNavbarDispatch } from '~/context/navContext'
-import { SpotlightProvider, openSpotlight } from '@mantine/spotlight';
-import type { SpotlightAction } from '@mantine/spotlight';
-import { useNavigate, useNavigation } from 'react-router-dom'
+import { SpotlightProvider, openSpotlight } from '@mantine/spotlight'
+import type { SpotlightAction } from '@mantine/spotlight'
+import { useNavigate } from 'react-router-dom'
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -131,7 +122,7 @@ function Navbar() {
       dispatch({ type: 'UPDATE_SIDEBAR_TOGGLE', sidebarToggle: !sidebarToggle })
     }
   }
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState(false)
   // async dispatch
   // const action2 = () => {
   //   if (dispatch) {
@@ -159,7 +150,7 @@ function Navbar() {
       onTrigger: () => routePush('/documentation'),
       icon: <IconFileText size={18} />,
     },
-  ];
+  ]
 
   return (
     <>
@@ -174,13 +165,13 @@ function Navbar() {
       >
         <ScrollArea offsetScrollbars style={{ height: '90vh' }}>
           <Grid columns={1} gutter="sm">
-          {new Array(5).fill('').map((_, index) => (
-            <Grid.Col key={index}>
-              <Alert icon={<IconAlertCircle size={16} />} title="Bummer!" color={index % 2 === 0 ? 'red' : 'green'} withCloseButton>
-                Something terrible happened! You made a mistake and your data was lost forever!
-              </Alert>
-            </Grid.Col>
-          ))}
+            {new Array(5).fill('').map((_, index) => (
+              <Grid.Col key={index}>
+                <Alert icon={<IconAlertCircle size={16} />} title="Bummer!" color={index % 2 === 0 ? 'red' : 'green'} withCloseButton>
+                  Something terrible happened! You made a mistake and your data was lost forever!
+                </Alert>
+              </Grid.Col>
+            ))}
           </Grid>
         </ScrollArea>
       </Drawer>
@@ -275,7 +266,9 @@ function Navbar() {
               </Menu.Target>
               <Menu.Dropdown>
                 <Menu.Item icon={<IconUserCircle size={14} stroke={1.5} />}>Profile</Menu.Item>
-                <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}>Account settings</Menu.Item>
+                <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}>
+                  Account settings
+                </Menu.Item>
                 <Menu.Item icon={<IconSwitchHorizontal size={14} stroke={1.5} />}>
                   Change account
                 </Menu.Item>

@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import { createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text, Badge } from '@mantine/core';
+import { useState } from 'react'
+import {
+  createStyles, Table, Checkbox, ScrollArea, Group, Avatar, Text, Badge,
+} from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
   rowSelected: {
@@ -8,24 +10,20 @@ const useStyles = createStyles((theme) => ({
         ? theme.fn.rgba(theme.colors[theme.primaryColor][7], 0.2)
         : theme.colors[theme.primaryColor][0],
   },
-}));
+}))
 
 interface TableSelectionProps {
   data: { avatar: string; name: string; email: string; status: string; id: string }[];
 }
 
 function TableSelection({ data }: TableSelectionProps) {
-  const { classes, cx } = useStyles();
-  const [selection, setSelection] = useState(['1']);
-  const toggleRow = (id: string) =>
-    setSelection((current) =>
-      current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
-    );
-  const toggleAll = () =>
-    setSelection((current) => (current.length === data.length ? [] : data.map((item) => item.id)));
+  const { classes, cx } = useStyles()
+  const [selection, setSelection] = useState(['1'])
+  const toggleRow = (id: string) => setSelection((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]))
+  const toggleAll = () => setSelection((current) => (current.length === data.length ? [] : data.map((item) => item.id)))
 
   const rows = data.map((item) => {
-    const selected = selection.includes(item.id);
+    const selected = selection.includes(item.id)
     return (
       <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
         <td>
@@ -46,8 +44,8 @@ function TableSelection({ data }: TableSelectionProps) {
         <td>{item.email}</td>
         <td><Badge color={item.status === 'active' ? 'green' : 'red'}>{item.status}</Badge></td>
       </tr>
-    );
-  });
+    )
+  })
 
   return (
     <ScrollArea>
@@ -70,7 +68,7 @@ function TableSelection({ data }: TableSelectionProps) {
         <tbody>{rows}</tbody>
       </Table>
     </ScrollArea>
-  );
+  )
 }
 
 export default TableSelection

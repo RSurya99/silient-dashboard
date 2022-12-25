@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AdvancedTable = () => {
+function AdvancedTable() {
   return (
     <div>AdvancedTable</div>
   )

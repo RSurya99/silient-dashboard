@@ -74,19 +74,16 @@ export default function LinksGroup({
 
   useEffect(() => {
     if (href) {
-      console.log('href', href)
       const isExternal = href.includes('http')
-      console.log('isExternal', isExternal)
       setSidebarItemProps({
         ...sidebarItemProps,
         component: isExternal ? Anchor : Link,
         target: isExternal ? '_blank' : undefined,
         [isExternal ? 'href' : 'to']: href,
       })
-      console.log('sidebarItemProps dsa', sidebarItemProps)
     }
   }, [href])
-  
+
   const items = (hasLinks ? links : []).map((link) => (
     <Text
       component={Link}
@@ -99,7 +96,7 @@ export default function LinksGroup({
   ))
 
   useEffect(() => {
-    if(links){
+    if (links) {
       setOpened(links.some((link) => link.link === location.pathname))
     }
   }, [location.pathname])

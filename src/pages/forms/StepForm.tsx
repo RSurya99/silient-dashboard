@@ -1,6 +1,6 @@
 import React from 'react'
 
-const StepForm = () => {
+function StepForm() {
   return (
     <div>StepForm</div>
   )

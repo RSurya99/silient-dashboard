@@ -1,6 +1,8 @@
-import { Avatar, createStyles, Image, Text } from '@mantine/core';
-import { useListState } from '@mantine/hooks';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import {
+  Avatar, createStyles, Text,
+} from '@mantine/core'
+import { useListState } from '@mantine/hooks'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 const useStyles = createStyles((theme) => ({
   item: {
@@ -17,7 +19,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   itemDragging: {
-  boxShadow: theme.shadows.sm,
+    boxShadow: theme.shadows.sm,
   },
 
   symbol: {
@@ -25,7 +27,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 700,
     width: 60,
   },
-}));
+}))
 
 interface DndListProps {
   data: {
@@ -38,8 +40,8 @@ interface DndListProps {
 }
 
 function KanbanBoard({ data }: DndListProps) {
-  const { classes, cx } = useStyles();
-  const [state, handlers] = useListState(data);
+  const { classes, cx } = useStyles()
+  const [state, handlers] = useListState(data)
 
   const items = state.map((item, index) => (
     <Draggable key={item.symbol} index={index} draggableId={item.symbol}>
@@ -54,19 +56,25 @@ function KanbanBoard({ data }: DndListProps) {
           <div>
             <Text size="sm">{item.name}</Text>
             <Text color="dimmed" size="xs">
-              Position: {item.position} • Mass: {item.mass}
+              Position:
+              {' '}
+              {item.position}
+              {' '}
+              • Mass:
+              {' '}
+              {item.mass}
             </Text>
           </div>
         </div>
       )}
     </Draggable>
-  ));
+  ))
 
   return (
     <DragDropContext
-      onDragEnd={({ destination, source }) =>
+      onDragEnd={({ destination, source }) => {
         handlers.reorder({ from: source.index, to: destination?.index || 0 })
-      }
+      }}
     >
       <Droppable droppableId="dnd-list" direction="vertical">
         {(provided) => (
@@ -77,7 +85,7 @@ function KanbanBoard({ data }: DndListProps) {
         )}
       </Droppable>
     </DragDropContext>
-  );
+  )
 }
 
 export default KanbanBoard

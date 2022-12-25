@@ -57,22 +57,20 @@ function ServerError() {
   }, [])
 
   return (
-    <>
-      <Center style={{ height: '100vh' }}>
-        <Container size="lg" style={{ width: '100%' }}>
-          <div className={classes.label}>500</div>
-          <Title className={classes.title}>Oops, Something went wrong.</Title>
-          <Text color="dimmed" size="lg" align="center" className={classes.description}>
-            We are working on fixing the problem, please try again later.
-          </Text>
-          <Group position="center">
-            <Button component={Link} to="/" variant="subtle" size="md">
-              Take me back to home page
-            </Button>
-          </Group>
-        </Container>
-      </Center>
-    </>
+    <Center style={{ height: '100vh' }}>
+      <Container size="lg" style={{ width: '100%' }}>
+        <div className={classes.label}>500</div>
+        <Title className={classes.title}>Oops, Something went wrong.</Title>
+        <Text color="dimmed" size="lg" align="center" className={classes.description}>
+          We are working on fixing the problem, please try again later.
+        </Text>
+        <Group position="center">
+          <Button component={Link} to="/" variant="subtle" size="md">
+            Take me back to home page
+          </Button>
+        </Group>
+      </Container>
+    </Center>
   )
 }
 

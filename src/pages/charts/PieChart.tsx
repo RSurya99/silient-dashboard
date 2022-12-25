@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PieChart = () => {
+function PieChart() {
   return (
     <div>PieChart</div>
   )

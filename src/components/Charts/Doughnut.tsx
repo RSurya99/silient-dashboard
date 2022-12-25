@@ -1,25 +1,29 @@
 import React, { useState } from 'react'
-import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
+import {
+  PieChart, Pie, Sector, ResponsiveContainer,
+} from 'recharts'
 
 const data = [
   { name: 'Group A', value: 400 },
   { name: 'Group B', value: 300 },
   { name: 'Group C', value: 300 },
   { name: 'Group D', value: 200 },
-];
+]
 
 const renderActiveShape = (props: any) => {
-  const RADIAN = Math.PI / 180;
-  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + (outerRadius + 10) * cos;
-  const sy = cy + (outerRadius + 10) * sin;
-  const mx = cx + (outerRadius + 15) * cos;
-  const my = cy + (outerRadius + 40) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 10;
-  const ey = my;
-  const textAnchor = cos >= 0 ? 'start' : 'end';
+  const RADIAN = Math.PI / 180
+  const {
+    cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value,
+  } = props
+  const sin = Math.sin(-RADIAN * midAngle)
+  const cos = Math.cos(-RADIAN * midAngle)
+  const sx = cx + (outerRadius + 10) * cos
+  const sy = cy + (outerRadius + 10) * sin
+  const mx = cx + (outerRadius + 15) * cos
+  const my = cy + (outerRadius + 40) * sin
+  const ex = mx + (cos >= 0 ? 1 : -1) * 10
+  const ey = my
+  const textAnchor = cos >= 0 ? 'start' : 'end'
 
   return (
     <g>
@@ -51,17 +55,16 @@ const renderActiveShape = (props: any) => {
         {`(Rate ${(percent * 100).toFixed(2)}%)`}
       </text>
     </g>
-  );
-};
+  )
+}
 
-const Doughnut = () => {
+function Doughnut() {
   const [activeIndex, setActiveIndex] = useState<number>(0)
 
   const onPieEnter = (_: any, index: number) => {
-    console.log('called', index)
     setActiveIndex(index)
   }
-  
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieChart>

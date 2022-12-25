@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BasicForm = () => {
+function BasicForm() {
   return (
     <div>BasicForm</div>
   )
