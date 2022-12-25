@@ -1,8 +1,6 @@
 import {
   createStyles, Title, Text, Button, Container, Group, Center,
 } from '@mantine/core'
-import { useEffect } from 'react'
-import { useNavbarDispatch } from '~/context/navContext'
 import { Link } from 'react-router-dom'
 
 const useStyles = createStyles((theme) => ({
@@ -44,16 +42,6 @@ const useStyles = createStyles((theme) => ({
 
 function NoMatch() {
   const { classes } = useStyles()
-  const dispatch = useNavbarDispatch()
-
-  useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'UPDATE_BREADCRUMB_ITEMS',
-        breadcrumbItems: [],
-      })
-    }
-  }, [])
 
   return (
     <Center style={{ height: '100vh' }}>

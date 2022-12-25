@@ -2,7 +2,8 @@ import { lazy } from 'react'
 
 export function lazyLoad(path: string, namedExport?: string) {
   return lazy(() => {
-    const promise = wait(1000).then(() => import(path))
+    console.log('path', path)
+    const promise = wait(1000).then(() => import(`../src/${path}.tsx`))
     if (namedExport == null) {
       return promise
     }

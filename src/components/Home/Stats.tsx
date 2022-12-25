@@ -1,5 +1,5 @@
 import {
-  createStyles, Group, Paper, SimpleGrid, Text,
+  createStyles, Group, Card, SimpleGrid, Text,
 } from '@mantine/core'
 import {
   IconArrowUpRight,
@@ -45,7 +45,7 @@ function Stats({ data }: StatsGridProps) {
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight
 
     return (
-      <Paper withBorder p="md" radius="sm" key={stat.title}>
+      <Card withBorder p="md" radius="sm" key={stat.title}>
         <Group position="apart">
           <Text size="xs" color="dimmed" className={classes.title}>
             {stat.title}
@@ -72,7 +72,7 @@ function Stats({ data }: StatsGridProps) {
         <Text size="xs" color="dimmed" mt={7}>
           Compared to previous month
         </Text>
-      </Paper>
+      </Card>
     )
   })
   return (

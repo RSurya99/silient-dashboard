@@ -1,5 +1,4 @@
-import { Suspense, useEffect, useState } from 'react'
-import { useNavbarDispatch } from '~/context/navContext'
+import { Suspense, useState } from 'react'
 import Stats from '~/components/Home/Stats'
 import {
   IconUser, IconDots, IconArrowUp, IconInfoCircle,
@@ -17,7 +16,7 @@ import KanbanBoard from '~/components/Kanban'
 import { v4 as uuidv4 } from 'uuid'
 import { lazyLoad } from '~/lazyLoad'
 
-const AreaChartTwo = lazyLoad('./components/Charts/Area')
+const AreaChartTwo = lazyLoad('components/Charts/Area')
 
 const useStyles = createStyles(() => ({
 
@@ -160,21 +159,9 @@ for (let i = 0; i < 8; i++) {
 
 function Home() {
   const { theme } = useStyles()
-  const dispatch = useNavbarDispatch()
   const [areaChartType, setAreaChartType] = useState<string>('monthly')
   const [segmentedValue, setSegmentedValue] = useState<string>('')
   // const [isPending, startTransition] = useTransition()
-
-  useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'UPDATE_BREADCRUMB_ITEMS',
-        breadcrumbItems: [
-          { label: 'Home', link: '/' },
-        ],
-      })
-    }
-  }, [])
   const statsTableBody = statsTable.map((element, idx) => (
     <tr key={element.name}>
       <td>{idx + 1}</td>
