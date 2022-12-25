@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useNavbarDispatch } from '~/context/navContext'
 import Stats from '~/components/Home/Stats'
 import {
   IconUser, IconDots, IconArrowUp, IconInfoCircle,
 } from '@tabler/icons'
 import {
-  Grid, AspectRatio, Table, Card, Group, Text, Menu, ActionIcon, createStyles, SegmentedControl, Center,
+  Grid, AspectRatio, Table, Card, Group, Text, Menu, ActionIcon, createStyles, SegmentedControl, Center, LoadingOverlay,
 } from '@mantine/core'
 import AreaChart from '~/components/Charts/Area'
 import TinyAreaChart from '~/components/Charts/TinyArea'
@@ -15,6 +15,9 @@ import SelectionTable from '~/components/Tables/SelectionTable'
 import BadgeCard from '~/components/Card/Badges'
 import KanbanBoard from '~/components/Kanban'
 import { v4 as uuidv4 } from 'uuid'
+import { lazyLoad } from '~/lazyLoad'
+
+const AreaChartTwo = lazyLoad('./components/Charts/Area')
 
 const useStyles = createStyles(() => ({
 
@@ -160,6 +163,7 @@ function Home() {
   const dispatch = useNavbarDispatch()
   const [areaChartType, setAreaChartType] = useState<string>('monthly')
   const [segmentedValue, setSegmentedValue] = useState<string>('')
+  // const [isPending, startTransition] = useTransition()
 
   useEffect(() => {
     if (dispatch) {
@@ -193,7 +197,11 @@ function Home() {
                   size="sm"
                   color="blue"
                   value={areaChartType}
-                  onChange={setAreaChartType}
+                  onChange={(value) => {
+                    // startTransition(() => {
+                    setAreaChartType(value)
+                    // })
+                  }}
                   data={[
                     { label: 'Monthly', value: 'monthly' },
                     { label: 'Annual', value: 'annual' },
@@ -203,7 +211,12 @@ function Home() {
             </Card.Section>
             <Card.Section inheritPadding py="xs">
               <AspectRatio ratio={16 / 10}>
-                <AreaChart />
+                {/* <Skeleton visible={isPending}> */}
+                {areaChartType === 'monthly' && (<AreaChart />)}
+                <Suspense fallback={<LoadingOverlay visible overlayBlur={2} />}>
+                  {areaChartType === 'annual' && (<AreaChartTwo />)}
+                </Suspense>
+                {/* </Skeleton> */}
               </AspectRatio>
             </Card.Section>
           </Card>

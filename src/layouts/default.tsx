@@ -3,9 +3,11 @@ import Navbar from '~/components/Navbar'
 import Sidebar from '~/components/Sidebar'
 import Footer from '~/components/Footer'
 import {
-  createStyles, Flex, Breadcrumbs, Anchor,
+  createStyles, Flex, Breadcrumbs, Anchor, LoadingOverlay,
 } from '@mantine/core'
 import { useNavbar } from '~/context/navContext'
+import { Suspense } from 'react'
+import CustomLoader from '~/components/Loader/CustomLoader'
 
 const useStyles = createStyles((theme) => ({
   main: {
@@ -42,7 +44,9 @@ function DefaultLayout() {
           <Breadcrumbs>
             {items}
           </Breadcrumbs>
-          <Outlet />
+          <Suspense fallback={<LoadingOverlay loader={CustomLoader} visible overlayBlur={2} />}>
+            <Outlet />
+          </Suspense>
         </div>
         <Footer />
       </main>

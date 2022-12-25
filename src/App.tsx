@@ -2,33 +2,34 @@ import { Routes, Route } from 'react-router-dom'
 import {
   MantineProvider, ColorSchemeProvider, ColorScheme,
 } from '@mantine/core'
-
 import { useState } from 'react'
-import Home from '~/pages/Home'
-import NoMatch from '~/pages/NoMatch'
 import Layout from '~/layouts/default'
 import BlankLayout from '~/layouts/blank'
 import { NavbarProvider } from '~/context/navContext'
 import Forbidden from '~/pages/Forbidden'
+import NoMatch from '~/pages/NoMatch'
 import ServerError from '~/pages/ServerError'
+import ForgotPassword from '~/pages/auth/ForgotPassword'
 import SignIn from './pages/auth/SignIn'
 import SignUp from './pages/auth/SignUp'
-import ForgotPassword from './pages/auth/ForgotPassword'
 import ResetPassword from './pages/auth/ResetPassword'
-import BasicForm from './pages/forms/BasicForm'
-import AdvancedForm from './pages/forms/AdvancedForm'
-import StepForm from './pages/forms/StepForm'
-import Bar from './pages/charts/BarChart'
-import Pie from './pages/charts/PieChart'
-import Line from './pages/charts/LineChart'
-import Card from './pages/components/CardComponent'
-import RichTextEditor from './pages/components/RichTextEditorComponent'
-import Icons from './pages/icons'
-import SimpleTable from './pages/tables/SimpleTable'
-import AdvancedTable from './pages/tables/AdvancedTable'
-import DynamicTable from './pages/tables/DynamicTable'
-import Profile from './pages/account/Profile'
-import Settings from './pages/account/Settings'
+import { lazyLoad } from './lazyLoad'
+
+const Home = lazyLoad('./pages/Home')
+const Icons = lazyLoad('./pages/icons', 'default')
+const Profile = lazyLoad('./pages/account/Profile')
+const Settings = lazyLoad('./pages/account/Settings')
+const BarChart = lazyLoad('./pages/charts/BarChart')
+const PieChart = lazyLoad('./pages/charts/PieChart')
+const LineChart = lazyLoad('./pages/charts/LineChart')
+const CardComponent = lazyLoad('./pages/components/CardComponent')
+const RichTextEditorComponent = lazyLoad('./pages/components/RichTextEditorComponent')
+const AdvancedForm = lazyLoad('./pages/forms/AdvancedForm')
+const BasicForm = lazyLoad('./pages/forms/BasicForm')
+const StepForm = lazyLoad('./pages/forms/StepForm')
+const AdvancedTable = lazyLoad('./pages/tables/AdvancedTable')
+const SimpleTable = lazyLoad('./pages/tables/SimpleTable')
+const DynamicTable = lazyLoad('./pages/tables/DynamicTable')
 
 function App() {
   const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
@@ -70,13 +71,13 @@ function App() {
                 <Route path="step-form" element={<StepForm />} />
               </Route>
               <Route path="charts">
-                <Route path="bar" element={<Bar />} />
-                <Route path="pie" element={<Pie />} />
-                <Route path="line" element={<Line />} />
+                <Route path="bar" element={<BarChart />} />
+                <Route path="pie" element={<PieChart />} />
+                <Route path="line" element={<LineChart />} />
               </Route>
               <Route path="components">
-                <Route path="card" element={<Card />} />
-                <Route path="rich-text-editor" element={<RichTextEditor />} />
+                <Route path="card" element={<CardComponent />} />
+                <Route path="rich-text-editor" element={<RichTextEditorComponent />} />
               </Route>
               <Route path="icons" element={<Icons />} />
               <Route path="tables">

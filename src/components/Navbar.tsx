@@ -35,7 +35,7 @@ import {
 import { useState } from 'react'
 import type { User } from '~/types/navbar'
 import { useNavbar, useNavbarDispatch } from '~/context/navContext'
-import { SpotlightProvider, openSpotlight } from '@mantine/spotlight'
+import { SpotlightProvider } from '@mantine/spotlight'
 import type { SpotlightAction } from '@mantine/spotlight'
 import { useNavigate } from 'react-router-dom'
 
@@ -147,7 +147,7 @@ function Navbar() {
     {
       title: 'Documentation',
       description: 'Visit documentation to lean more about all features',
-      onTrigger: () => routePush('/documentation'),
+      onTrigger: () => window.open('https://github.com/RSurya99/silient-dashboard', '_blank'),
       icon: <IconFileText size={18} />,
     },
   ]
@@ -197,7 +197,14 @@ function Navbar() {
               shortcut={['mod + K', '/']}
               nothingFoundMessage="Nothing found..."
             >
-              <UnstyledButton onClick={() => openSpotlight()} className={classes.search}>
+              <UnstyledButton
+                onClick={() => (
+                  import('@mantine/spotlight').then((module) => {
+                    module.openSpotlight()
+                  })
+                )}
+                className={classes.search}
+              >
                 <TextInput placeholder="Search" icon={<IconSearch size={14} />} rightSectionWidth={75} rightSection={<Kbd>Ctrl + K</Kbd>} />
               </UnstyledButton>
             </SpotlightProvider>
