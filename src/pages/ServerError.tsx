@@ -1,5 +1,5 @@
 import {
-  createStyles, Title, Text, Button, Container, Group,
+  createStyles, Title, Text, Button, Container, Group, Center,
 } from '@mantine/core'
 import { useEffect } from 'react'
 import { useNavbarDispatch } from '~/context/navContext'
@@ -57,18 +57,22 @@ function ServerError() {
   }, [])
 
   return (
-    <Container className={classes.root}>
-      <div className={classes.label}>500</div>
-      <Title className={classes.title}>Oops, Something went wrong.</Title>
-      <Text color="dimmed" size="lg" align="center" className={classes.description}>
-        We are working on fixing the problem, please try again later.
-      </Text>
-      <Group position="center">
-        <Button component={Link} to="/" variant="subtle" size="md">
-          Take me back to home page
-        </Button>
-      </Group>
-    </Container>
+    <>
+      <Center style={{ height: '100vh' }}>
+        <Container size="lg" style={{ width: '100%' }}>
+          <div className={classes.label}>500</div>
+          <Title className={classes.title}>Oops, Something went wrong.</Title>
+          <Text color="dimmed" size="lg" align="center" className={classes.description}>
+            We are working on fixing the problem, please try again later.
+          </Text>
+          <Group position="center">
+            <Button component={Link} to="/" variant="subtle" size="md">
+              Take me back to home page
+            </Button>
+          </Group>
+        </Container>
+      </Center>
+    </>
   )
 }
 

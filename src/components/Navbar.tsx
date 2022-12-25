@@ -15,6 +15,8 @@ Alert,
 Paper,
 Grid,
 ScrollArea,
+TextInput,
+Kbd,
 } from '@mantine/core'
 import {
   IconSearch,
@@ -33,10 +35,18 @@ import {
   IconBell,
   IconLanguage,
 IconAlertCircle,
+IconUser,
+IconUserCircle,
+IconDashboard,
+IconFileText,
+IconHome,
 } from '@tabler/icons'
 import { useState } from 'react'
 import type { User } from '~/types/navbar'
 import { useNavbar, useNavbarDispatch } from '~/context/navContext'
+import { SpotlightProvider, openSpotlight } from '@mantine/spotlight';
+import type { SpotlightAction } from '@mantine/spotlight';
+import { useNavigate, useNavigation } from 'react-router-dom'
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -62,6 +72,10 @@ const useStyles = createStyles((theme) => ({
   search: {
     [theme.fn.smallerThan('xs')]: {
       display: 'none',
+    },
+
+    'input:hover': {
+      cursor: 'pointer',
     },
   },
 
@@ -130,6 +144,22 @@ function Navbar() {
   }
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
+  const routePush = useNavigate()
+
+  const actions: SpotlightAction[] = [
+    {
+      title: 'Dashboard',
+      description: 'Get into Dashboard Homepage',
+      onTrigger: () => routePush('/'),
+      icon: <IconDashboard size={18} />,
+    },
+    {
+      title: 'Documentation',
+      description: 'Visit documentation to lean more about all features',
+      onTrigger: () => routePush('/documentation'),
+      icon: <IconFileText size={18} />,
+    },
+  ];
 
   return (
     <>
@@ -169,12 +199,17 @@ function Navbar() {
           </Group>
 
           <Group spacing="xs">
-            <Autocomplete
-              className={classes.search}
-              placeholder="Search"
-              icon={<IconSearch size={20} stroke={1.5} />}
-              data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
-            />
+            <SpotlightProvider
+              actions={actions}
+              searchIcon={<IconSearch size={18} />}
+              searchPlaceholder="Search..."
+              shortcut={['mod + K', '/']}
+              nothingFoundMessage="Nothing found..."
+            >
+              <UnstyledButton onClick={() => openSpotlight()} className={classes.search}>
+                <TextInput placeholder="Search" icon={<IconSearch size={14} />} rightSectionWidth={75} rightSection={<Kbd>Ctrl + K</Kbd>} />
+              </UnstyledButton>
+            </SpotlightProvider>
 
             <ActionIcon
               size="lg"
@@ -219,7 +254,7 @@ function Navbar() {
             </Menu>
 
             <Menu
-              width={260}
+              width={225}
               position="bottom-end"
               transition="pop-top-right"
               onClose={() => setUserMenuOpened(false)}
@@ -239,31 +274,14 @@ function Navbar() {
                 </UnstyledButton>
               </Menu.Target>
               <Menu.Dropdown>
-                <Menu.Item icon={<IconHeart size={14} color={theme.colors.red[6]} stroke={1.5} />}>
-                  Liked posts
-                </Menu.Item>
-                <Menu.Item icon={<IconStar size={14} color={theme.colors.yellow[6]} stroke={1.5} />}>
-                  Saved posts
-                </Menu.Item>
-                <Menu.Item icon={<IconMessage size={14} color={theme.colors.blue[6]} stroke={1.5} />}>
-                  Your comments
-                </Menu.Item>
-
-                <Menu.Label>Settings</Menu.Label>
+                <Menu.Item icon={<IconUserCircle size={14} stroke={1.5} />}>Profile</Menu.Item>
                 <Menu.Item icon={<IconSettings size={14} stroke={1.5} />}>Account settings</Menu.Item>
                 <Menu.Item icon={<IconSwitchHorizontal size={14} stroke={1.5} />}>
                   Change account
                 </Menu.Item>
-                <Menu.Item icon={<IconLogout size={14} stroke={1.5} />}>Logout</Menu.Item>
-
                 <Menu.Divider />
-
-                <Menu.Label>Danger zone</Menu.Label>
-                <Menu.Item icon={<IconPlayerPause size={14} stroke={1.5} />}>
-                  Pause subscription
-                </Menu.Item>
-                <Menu.Item color="red" icon={<IconTrash size={14} stroke={1.5} />}>
-                  Delete account
+                <Menu.Item color="red" icon={<IconLogout size={14} stroke={1.5} />}>
+                  Logout
                 </Menu.Item>
               </Menu.Dropdown>
             </Menu>

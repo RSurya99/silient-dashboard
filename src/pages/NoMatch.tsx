@@ -1,5 +1,5 @@
 import {
-  createStyles, Title, Text, Button, Container, Group,
+  createStyles, Title, Text, Button, Container, Group, Center,
 } from '@mantine/core'
 import { useEffect } from 'react'
 import { useNavbarDispatch } from '~/context/navContext'
@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom'
 
 const useStyles = createStyles((theme) => ({
   root: {
-    paddingTop: 80,
-    paddingBottom: 80,
+    margin: `auto`
   },
 
   label: {
@@ -57,19 +56,23 @@ function NoMatch() {
   }, [])
 
   return (
-    <Container className={classes.root}>
-      <div className={classes.label}>404</div>
-      <Title className={classes.title}>You have found a secret place.</Title>
-      <Text color="dimmed" size="lg" align="center" className={classes.description}>
-        The page you are trying to find is not found.
-        You may have mistyped or the page has been moved to another URL.
-      </Text>
-      <Group position="center">
-        <Button component={Link} to="/" variant="subtle" size="md">
-          Take me back to home page
-        </Button>
-      </Group>
-    </Container>
+    <>
+      <Center style={{ height: '100vh' }}>
+        <Container size="lg" style={{ width: '100%' }}>
+          <div className={classes.label}>404</div>
+          <Title className={classes.title}>You have found a secret place.</Title>
+          <Text color="dimmed" size="lg" align="center" className={classes.description}>
+            The page you are trying to find is not found.
+            You may have mistyped or the page has been moved to another URL.
+          </Text>
+          <Group position="center">
+            <Button component={Link} to="/" variant="subtle" size="md">
+              Take me back to home page
+            </Button>
+          </Group>
+        </Container>
+      </Center>
+    </>
   )
 }
 
