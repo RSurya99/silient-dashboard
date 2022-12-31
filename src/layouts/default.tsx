@@ -8,7 +8,7 @@ import {
 import { useNavbar, useNavbarDispatch } from '~/context/navContext'
 import { Suspense, useEffect } from 'react'
 import CustomLoader from '~/components/Loader/CustomLoader'
-import { capitalize } from 'lodash'
+import { startCase } from 'lodash'
 
 const useStyles = createStyles((theme) => ({
   main: {
@@ -34,11 +34,11 @@ function DefaultLayout() {
   const location = useLocation()
 
   useEffect(() => {
-    const pathName = location.pathname.split('/')
+    const pathName = location.pathname === '/' ? [''] : location.pathname.split('/')
     if (dispatch) {
       dispatch({
         type: 'UPDATE_BREADCRUMB_ITEMS',
-        breadcrumbItems: pathName.map((el) => ({ label: capitalize(el) || 'Home', link: el || '/' })),
+        breadcrumbItems: pathName.map((el) => ({ label: startCase(el.split('-').join(' ')) || 'Home', link: el || '/' })),
       })
     }
   }, [location])

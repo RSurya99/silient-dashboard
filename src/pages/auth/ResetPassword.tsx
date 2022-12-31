@@ -8,6 +8,8 @@ import {
   Center,
   PasswordInput,
 } from '@mantine/core'
+import { useForm, zodResolver } from '@mantine/form'
+import { z } from 'zod'
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -30,8 +32,25 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
+const ResetPasswordSchema = z.object({
+  password: z.string().min(8, { message: 'Password must be 8 or more characters long' }),
+  confirmPassword: z.string(),
+}).refine(({ password, confirmPassword }) => password === confirmPassword, {
+  message: 'Passwords do not match',
+  path: ['confirmPassword'],
+})
+
 function ResetPassword() {
   const { classes } = useStyles()
+  const formData = useForm({
+    initialValues: {
+      password: '',
+      confirmPassword: '',
+    },
+    validate: zodResolver(ResetPasswordSchema),
+    validateInputOnBlur: true,
+    validateInputOnChange: true,
+  })
 
   return (
     <Center style={{ height: '100vh' }}>
@@ -44,11 +63,13 @@ function ResetPassword() {
         </Text>
 
         <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
-          <PasswordInput label="New Password" placeholder="Your new password" required mt="md" />
-          <PasswordInput label="Confirm Password" placeholder="Your confirmation password" required mt="md" />
-          <Button fullWidth mt="xl">
-            Reset Password
-          </Button>
+          <form onSubmit={formData.onSubmit((values) => console.log(values))}>
+            <PasswordInput {...formData.getInputProps('password')} label="New Password" placeholder="Your new password" withAsterisk mt="md" />
+            <PasswordInput {...formData.getInputProps('confirmPassword')} label="Confirm Password" placeholder="Your confirmation password" withAsterisk mt="md" />
+            <Button type="submit" fullWidth mt="xl">
+              Reset Password
+            </Button>
+          </form>
         </Paper>
       </Container>
     </Center>

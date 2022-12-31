@@ -10,8 +10,10 @@ import {
   Anchor,
   Center,
 } from '@mantine/core'
+import { useForm, zodResolver } from '@mantine/form'
 import { IconArrowLeft } from '@tabler/icons'
 import { Link } from 'react-router-dom'
+import { z } from 'zod'
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -34,8 +36,20 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
+const ForgotPasswordSchema = z.object({
+  email: z.string().email(),
+})
+
 function ForgotPassword() {
   const { classes } = useStyles()
+  const formData = useForm({
+    initialValues: {
+      email: '',
+    },
+    validate: zodResolver(ForgotPasswordSchema),
+    validateInputOnBlur: true,
+    validateInputOnChange: true,
+  })
 
   return (
     <Center style={{ height: '100vh' }}>
@@ -48,16 +62,18 @@ function ForgotPassword() {
         </Text>
 
         <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
-          <TextInput label="Your email" placeholder="johndoe@email.com" required />
-          <Group position="apart" mt="lg" className={classes.controls}>
-            <Anchor color="dimmed" size="sm" className={classes.control}>
-              <Center inline>
-                <IconArrowLeft size={12} stroke={1.5} />
-                <Anchor ml={5} component={Link} to="/auth/signin" color="dimmed">Back to Sign In page</Anchor>
-              </Center>
-            </Anchor>
-            <Button className={classes.control}>Send Email</Button>
-          </Group>
+          <form onSubmit={formData.onSubmit((values) => console.log(values))}>
+            <TextInput {...formData.getInputProps('email')} label="Your email" placeholder="johndoe@email.com" withAsterisk />
+            <Group position="apart" mt="lg" className={classes.controls}>
+              <Anchor color="dimmed" size="sm" className={classes.control}>
+                <Center inline>
+                  <IconArrowLeft size={12} stroke={1.5} />
+                  <Anchor ml={5} component={Link} to="/auth/signin" color="dimmed">Back to Sign In page</Anchor>
+                </Center>
+              </Anchor>
+              <Button type="submit" className={classes.control}>Send Email</Button>
+            </Group>
+          </form>
         </Paper>
       </Container>
     </Center>
