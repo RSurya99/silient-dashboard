@@ -1,4 +1,4 @@
-<h1 align="center">Silient Dashboard</h1>
+<h1 align="center">Silient Dashboard (WIP)</h1>
 
 ![Silient Screenshot](public/preview.png)
 
@@ -9,6 +9,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/rsurya99/silient-dashboard.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/rsurya99/silient-dashboard)
 [![License](https://img.shields.io/github/license/rsurya99/silient-dashboard.svg)](LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 
 </div>
 
